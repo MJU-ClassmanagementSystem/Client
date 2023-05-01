@@ -43,6 +43,13 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/jsx-wrap-multilines': 'off',
     'react/jsx-uses-react': 'off',
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
     'react/prop-types': 'off',
     'jsx-a11y/accessible-emoji': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
