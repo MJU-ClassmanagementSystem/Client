@@ -40,6 +40,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'warn',
+    'react/jsx-no-useless-fragment': 'error',
     'react/require-default-props': 'off',
     'react/jsx-wrap-multilines': 'off',
     'react/jsx-uses-react': 'off',
