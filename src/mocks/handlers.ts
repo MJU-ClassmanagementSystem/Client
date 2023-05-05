@@ -22,9 +22,45 @@ export const handlers = [
     )
   }),
 
+  rest.post('/signup/teacher', async (req, res, ctx) => {
+    const { id, name, school, password } = await req.json<{
+      id: string
+      name: string
+      school: string
+      password: string
+    }>()
+
+    if (!id.length || !name.length || !school.length || !password.length)
+      return res(ctx.delay(100), ctx.status(401))
+
+    return res(ctx.delay(100), ctx.status(200))
+  }),
+
+  rest.post('/signup/parent', async (req, res, ctx) => {
+    const { id, studentId, password } = await req.json<{
+      id: string
+      studentId: string
+      password: string
+    }>()
+
+    if (!id.length || !studentId.length || !password.length)
+      return res(ctx.delay(100), ctx.status(401))
+
+    return res(ctx.delay(100), ctx.status(200))
+  }),
+
+  rest.post('/register', async (req, res, ctx) => {
+    const { id, name } = await req.json<{
+      id: string
+      name: string
+    }>()
+
+    if (!id.length || !name.length) return res(ctx.delay(100), ctx.status(401))
+
+    return res(ctx.delay(100), ctx.status(200))
+  }),
+
   //TODO: 작성 필요
-  // rest.post('/signup/teacher', null),
-  // rest.post('/signup/parent', null),
   // rest.post('/register', null),
   // rest.get('/class/1', null),
   // rest.get('/student', null),
