@@ -45,6 +45,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
+    "msw": "^1.2.1",
     "postcss-lit": "^1.1.0",
     "prettier": "^2.8.8",
     "sass": "^1.62.1",
@@ -65,5 +66,8 @@
     "src/**/*.{css,scss}": [
       "stylelint \"**/*.{scss,css}\""
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
