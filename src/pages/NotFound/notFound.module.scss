@@ -1,0 +1,15 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 64px;
+}
+
+.description {
+  font-size: 16px;
+}
