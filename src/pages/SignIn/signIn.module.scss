@@ -6,8 +6,22 @@
   height: 100%;
 
   .imgWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
-    background-color: bisque;
+    background-image: url('src/assets/images/splashImage.jpg');
+    background-position: center;
+    background-size: cover;
+    opacity: 0.9;
+
+    & p {
+      font-size: 40px;
+      font-weight: 800;
+      color: color.$WHITE;
+      text-align: center;
+      letter-spacing: 1.2px;
+    }
   }
 
   .contentWrap {
@@ -35,7 +49,8 @@
         border-radius: 4px;
       }
 
-      p {
+      .label {
+        display: block;
         margin-bottom: 6px;
         font-size: 16px;
         font-weight: 300;
