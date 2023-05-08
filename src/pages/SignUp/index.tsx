@@ -1,7 +1,8 @@
 import { DevTool } from '@hookform/devtools'
 import classNames from 'classnames/bind'
-import { BaseSyntheticEvent, ChangeEvent, FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
 import Dropdown from 'src/components/features/Dropdown'
 import FullScreen from 'src/components/layout/FullScreen'
 import classManagement from 'src/service/classManagement'
@@ -13,22 +14,24 @@ const cx = classNames.bind(styles)
 
 const SignUpPage = () => {
   const { register, control, handleSubmit } = useForm<SignupFormData>()
-
   const [selectedItem, setSelectedItem] = useState('선생님')
+  const navigate = useNavigate()
 
   const isTeacher = selectedItem === '선생님'
   const isParent = !isTeacher
 
-  const onSubmit = handleSubmit((data) => {
-    const { id, name, password, school, studentId } = data
+  const onSubmit = handleSubmit(async ({ id, name, password, school, studentId }) => {
+    if (!id || !password) return
     switch (selectedItem) {
       case '선생님':
-        if (id && password && name && school)
-          classManagement.signupTeacher(id, password, name, school)
+        if (!name || !school) return
+        await classManagement.signupTeacher(id, password, name, school)
+        navigate('/signIn')
         return
       case '학부모':
-        if (id && password && studentId)
-          classManagement.signupParent(id, password, studentId)
+        if (!studentId) return
+        await classManagement.signupParent(id, password, studentId)
+        navigate('/signIn')
         return
       default:
         return
