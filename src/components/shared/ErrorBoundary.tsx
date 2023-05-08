@@ -24,7 +24,7 @@ class ErrorBoundary extends React.Component<PropsWithChildren, State> {
   }
 
   componentDidCatch(error: Error) {
-    toast(`${error.message}`)
+    toast.error(`${error.message}`)
   }
 
   render() {
