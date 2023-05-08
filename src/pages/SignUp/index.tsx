@@ -1,28 +1,26 @@
+import { DevTool } from '@hookform/devtools'
 import classNames from 'classnames/bind'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { BaseSyntheticEvent, ChangeEvent, FormEvent, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Dropdown from 'src/components/features/Dropdown'
 import FullScreen from 'src/components/layout/FullScreen'
 import classManagement from 'src/service/classManagement'
+import { SignupFormData } from 'src/types/reactHookForm'
 
 import styles from './signUp.module.scss'
 
 const cx = classNames.bind(styles)
 
 const SignUpPage = () => {
+  const { register, control, handleSubmit } = useForm<SignupFormData>()
+
   const [selectedItem, setSelectedItem] = useState('선생님')
-  // TODO: input 리펙토링
-  const [id, setId] = useState('')
-  const [password, setPassword] = useState('')
-  const [studentId, setStudentId] = useState('')
-  const [name, setName] = useState('')
-  const [school, setSchool] = useState('')
 
   const isTeacher = selectedItem === '선생님'
   const isParent = !isTeacher
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    // TODO: 에러 핸들링
+  const onSubmit = handleSubmit((data) => {
+    const { id, name, password, school, studentId } = data
     switch (selectedItem) {
       case '선생님':
         if (id && password && name && school)
@@ -35,7 +33,7 @@ const SignUpPage = () => {
       default:
         return
     }
-  }
+  })
 
   return (
     <FullScreen className={cx('signUp')}>
@@ -43,7 +41,7 @@ const SignUpPage = () => {
         <p>Class Management System</p>
       </div>
       <div className={cx('formContainer')}>
-        <form className={cx('form')} onSubmit={handleSubmit}>
+        <form className={cx('form')} onSubmit={onSubmit}>
           <h1 className={cx('title')}>Sign Up</h1>
           <Dropdown
             title="type"
@@ -58,9 +56,8 @@ const SignUpPage = () => {
             className={cx('input')}
             id="id"
             type="text"
-            value={id}
             placeholder="아이디를 입력해주세요"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setId(e.currentTarget.value)}
+            {...register('id')}
           />
           <label className={cx('label')} htmlFor="password">
             password
@@ -69,11 +66,8 @@ const SignUpPage = () => {
             className={cx('input')}
             id="password"
             type="password"
-            value={password}
             placeholder="비밀번호를 입력해주세요"
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.currentTarget.value)
-            }
+            {...register('password')}
           />
           {isParent && (
             <>
@@ -84,11 +78,8 @@ const SignUpPage = () => {
                 className={cx('input')}
                 id="text"
                 type="text"
-                value={studentId}
                 placeholder="자녀의 학번을 입력해주세요"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setStudentId(e.currentTarget.value)
-                }
+                {...register('studentId')}
               />
             </>
           )}
@@ -101,11 +92,8 @@ const SignUpPage = () => {
                 className={cx('input')}
                 id="name"
                 type="text"
-                value={name}
                 placeholder="성함을 입력해주세요"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setName(e.currentTarget.value)
-                }
+                {...register('name')}
               />
             </>
           )}
@@ -118,11 +106,8 @@ const SignUpPage = () => {
                 className={cx('input')}
                 id="school"
                 type="text"
-                value={school}
                 placeholder="소속된 학교를 입력해주세요"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setSchool(e.currentTarget.value)
-                }
+                {...register('school')}
               />
             </>
           )}
@@ -131,6 +116,7 @@ const SignUpPage = () => {
           </button>
         </form>
       </div>
+      <DevTool control={control} />
     </FullScreen>
   )
 }
