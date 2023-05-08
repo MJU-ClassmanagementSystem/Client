@@ -49,17 +49,17 @@ export default {
   /**
    * 부모님 회원가입
    * @param id 아아디
-   * @param pw 비밀번호
+   * @param password 비밀번호
    * @param studentId 자식 학번
    * @returns
    */
-  signupParent(id: string, pw: string, studentId: string): AxiosPromise {
+  signupParent(id: string, password: string, studentId: string): AxiosPromise {
     return Axios({
       method: 'post',
       url: '/signup/parent',
       data: {
         id,
-        pw,
+        password,
         studentId,
       },
     })

@@ -1,0 +1,84 @@
+@use 'src/styles/constants/colors' as color;
+
+.signUp {
+  display: flex;
+  min-width: 1000px;
+
+  .photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-image: url('src/assets/images/splashImage.jpg');
+    background-position: center;
+    background-size: cover;
+    opacity: 0.9;
+
+    & p {
+      font-size: 40px;
+      font-weight: 800;
+      color: color.$WHITE;
+      text-align: center;
+      letter-spacing: 1.2px;
+    }
+  }
+
+  .formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+
+    .form {
+      .title {
+        margin-bottom: 60px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 16px;
+        font-weight: 300;
+        color: color.$BLACK;
+        text-transform: capitalize;
+      }
+
+      .label[for='id'] {
+        margin-top: 20px;
+      }
+
+      .input {
+        display: block;
+        width: 480px;
+        height: 42px;
+        padding: 0 8px;
+        font-size: 16px;
+        color: color.$GRAY1;
+        border: 1px solid color.$BORDER;
+        border-radius: 4px;
+
+        &::placeholder {
+          font-weight: 300;
+        }
+
+        &:not(:last-of-type) {
+          margin-bottom: 20px;
+        }
+      }
+
+      .button {
+        width: 100%;
+        height: 50px;
+        margin-top: 40px;
+        font-size: 16px;
+        font-weight: 500;
+        color: color.$WHITE;
+        letter-spacing: 1px;
+        background-color: color.$PRIMARY;
+        border-radius: 4px;
+      }
+    }
+  }
+}

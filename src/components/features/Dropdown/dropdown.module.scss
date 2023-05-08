@@ -1,0 +1,52 @@
+@use 'src/styles/constants/colors' as color;
+
+.dropdown {
+  position: relative;
+
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: 300;
+    color: color.$BLACK;
+    text-transform: capitalize;
+  }
+
+  .menuButton {
+    display: block;
+    width: 480px;
+    height: 42px;
+    padding: 0 8px;
+    font-size: 16px;
+    font-weight: 300;
+    color: color.$BLACK;
+    text-align: start;
+    text-transform: capitalize;
+    border: 1px solid color.$BORDER;
+    border-radius: 4px;
+  }
+
+  .list {
+    position: absolute;
+    top: 70px;
+
+    .item {
+      display: block;
+      width: 480px;
+      height: 42px;
+      padding: 0 8px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 42px;
+      text-align: start;
+      background-color: color.$WHITE;
+      border: 1px solid color.$BORDER;
+      border-radius: 4px;
+      box-shadow: 0 1px 10px 1px rgba($color: color.$BLACK, $alpha: 10%);
+    }
+
+    :not(:last-child) {
+      margin-bottom: 4px;
+    }
+  }
+}
