@@ -1,7 +1,9 @@
 import { DevTool } from '@hookform/devtools'
 import classNames from 'classnames/bind'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
 import FullScreen from 'src/components/layout/FullScreen'
+import classManagement from 'src/service/classManagement'
 import { SignInFormData } from 'src/types/reactHookForm'
 
 import styles from './signIn.module.scss'
@@ -10,9 +12,11 @@ const cx = classNames.bind(styles)
 
 const SignInPage = () => {
   const { register, control, handleSubmit } = useForm<SignInFormData>()
+  const navigate = useNavigate()
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
+  const onSubmit = handleSubmit(async ({ id, password }) => {
+    await classManagement.login(id, password)
+    navigate('/')
   })
 
   return (
