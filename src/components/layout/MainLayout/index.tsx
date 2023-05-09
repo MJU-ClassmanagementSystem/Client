@@ -1,19 +1,18 @@
 import classNames from 'classnames/bind'
-import { ReactNode } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import FullScreen from '../FullScreen'
 import SideBar from '../SideBar'
 import styles from './mainLayout.module.scss'
 
-type MainLayout = { children: ReactNode }
-
 const cx = classNames.bind(styles)
 
-const MainLayout = ({ children }: MainLayout) => {
+const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <FullScreen className={cx('mainLayout')}>
       <SideBar schoolName="연송초등학교" />
-      {children}
+      {children || <Outlet />}
     </FullScreen>
   )
 }
