@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind'
-import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { GraduationIcon } from 'src/assets/svgs'
 import MenuButton from 'src/components/features/MenuButton'
-import { MenuButtonType } from 'src/types'
 
 import styles from './sideBar.module.scss'
 
@@ -11,7 +10,8 @@ const cx = classNames.bind(styles)
 type SideBarProps = { schoolName: string }
 
 const SideBar = ({ schoolName }: SideBarProps) => {
-  const [currentMenu, setCurrentMenu] = useState<MenuButtonType>('manageClass')
+  const { pathname } = useLocation()
+  const parsedMenu = pathname.replace('/', '')
 
   return (
     <aside className={cx('sidebar')}>
@@ -20,24 +20,15 @@ const SideBar = ({ schoolName }: SideBarProps) => {
       </div>
       <ul>
         <li>
-          <MenuButton
-            type="manageClass"
-            isActive={'manageClass' === currentMenu}
-            setMenu={setCurrentMenu}
-          />
+          <MenuButton type="manageClass" isActive={'manageClass' === parsedMenu} />
         </li>
         <li>
-          <MenuButton
-            type="manageStudent"
-            isActive={'manageStudent' === currentMenu}
-            setMenu={setCurrentMenu}
-          />
+          <MenuButton type="manageStudent" isActive={'manageStudent' === parsedMenu} />
         </li>
         <li>
           <MenuButton
             type="manageAttendance"
-            isActive={'manageAttendance' === currentMenu}
-            setMenu={setCurrentMenu}
+            isActive={'manageAttendance' === parsedMenu}
           />
         </li>
       </ul>
