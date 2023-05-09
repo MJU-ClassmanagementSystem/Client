@@ -60,10 +60,44 @@ export const handlers = [
     return res(ctx.delay(100), ctx.status(200))
   }),
 
+  rest.get('/student/:week', async (req, res, ctx) => {
+    const { week } = req.params
+
+    return res(
+      ctx.delay(100),
+      ctx.status(200),
+      ctx.json([
+        {
+          id: '1',
+          name: '김해찬',
+          attend: [1, 0, 1, 2, 1],
+        },
+        {
+          id: '2',
+          name: '홍길동',
+          attend: [2, 2, 0, 1, 0],
+        },
+        {
+          id: '2',
+          name: '김보현',
+          attend: [0, 0, 0, 0, 0],
+        },
+        {
+          id: '2',
+          name: '박은서',
+          attend: [2, 2, 0, 1, 0],
+        },
+        {
+          id: '2',
+          name: '차재환',
+          attend: [0, 0, 0, 0, 0],
+        },
+      ]),
+    )
+  }),
   //TODO: 작성 필요
   // rest.post('/register', null),
   // rest.get('/class/1', null),
-  // rest.get('/student', null),
   // rest.get('/student/class/1/2', null),
   // rest.get('/student/break/1/2', null),
   // rest.get('/attendance/', null),
