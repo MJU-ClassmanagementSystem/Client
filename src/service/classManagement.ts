@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios'
-import { LoginResponse } from 'src/types/axios'
+import { GetAttendanceResponse, LoginResponse } from 'src/types/axios'
 import Axios from 'src/utils/axios'
 
 export default {
@@ -79,6 +79,18 @@ export default {
         id,
         name,
       },
+    })
+  },
+
+  /**
+   * 출석상태를 가져오는 api
+   * @param week 해당하는 주차
+   * @returns
+   */
+  getAttendance(week: number): AxiosPromise<GetAttendanceResponse> {
+    return Axios({
+      method: 'get',
+      url: `/student/${week}`,
     })
   },
 }
