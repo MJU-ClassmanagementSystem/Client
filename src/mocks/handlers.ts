@@ -63,6 +63,8 @@ export const handlers = [
   rest.get('/student/:week', async (req, res, ctx) => {
     const { week } = req.params
 
+    if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
+
     return res(
       ctx.delay(100),
       ctx.status(200),
