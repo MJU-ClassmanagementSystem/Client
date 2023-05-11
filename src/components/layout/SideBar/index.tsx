@@ -11,7 +11,6 @@ type SideBarProps = { schoolName: string }
 
 const SideBar = ({ schoolName }: SideBarProps) => {
   const { pathname } = useLocation()
-  const parsedMenu = pathname.replace('/', '')
 
   return (
     <aside className={cx('sidebar')}>
@@ -20,15 +19,21 @@ const SideBar = ({ schoolName }: SideBarProps) => {
       </div>
       <ul>
         <li>
-          <MenuButton type="manageClass" isActive={'manageClass' === parsedMenu} />
+          <MenuButton
+            type="manageClass"
+            isActive={/\/manageClass(?:\/\d+)?/.test(pathname)}
+          />
         </li>
         <li>
-          <MenuButton type="manageStudent" isActive={'manageStudent' === parsedMenu} />
+          <MenuButton
+            type="manageStudent"
+            isActive={/\/manageStudent(?:\/\d+)?/.test(pathname)}
+          />
         </li>
         <li>
           <MenuButton
             type="manageAttendance"
-            isActive={'manageAttendance' === parsedMenu}
+            isActive={/\/manageAttendance(?:\/\d+)?/.test(pathname)}
           />
         </li>
       </ul>
