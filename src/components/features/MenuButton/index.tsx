@@ -28,7 +28,7 @@ const MenuButton = ({ isActive, type }: MenuButtonProps) => {
   }[type]
 
   const handleClick = () => {
-    navigate(type)
+    navigate(`${type}/1`)
   }
 
   return (
