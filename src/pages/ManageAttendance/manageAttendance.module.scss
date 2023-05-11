@@ -1,0 +1,19 @@
+@use 'src/styles/constants/colors' as color;
+
+.manageAttendancePage {
+  overflow: scroll;
+  background-color: color.$PURE_WHITE;
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    padding: 0 80px 80px;
+
+    .buttonContainer {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      align-self: flex-end;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@use 'src/styles/constants/colors' as color;
+
+.button {
+  width: 170px;
+  height: 58px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 58px;
+  color: color.$BLACK;
+  text-align: center;
+  background-color: color.$WHITE;
+  border: 1px solid color.$BORDER;
+  border-radius: 10px;
+}
