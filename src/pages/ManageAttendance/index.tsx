@@ -37,7 +37,7 @@ const ManageAttendancePage = () => {
 
   return (
     <FullScreen className={cx('manageAttendancePage')}>
-      <Header />
+      <Header menuTitle="출석부" />
       <main className={cx('main')}>
         <div className={cx('buttonContainer')}>
           <Button>학생 추가</Button>
