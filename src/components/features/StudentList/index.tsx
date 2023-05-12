@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import styles from './student.module.scss'
 
@@ -13,6 +13,9 @@ const cx = classNames.bind(styles)
 
 const StudentList = () => {
   const [students, setStudents] = useState<Student[]>([])
+  const [selectedID, setSelectedID] = useState<string | null>(null)
+  const [toggleTop, setToggleTop] = useState(0)
+  const listRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   useEffect(() => {
     const fetchData = () => {
@@ -58,15 +61,36 @@ const StudentList = () => {
 
     const data = fetchData()
     setStudents(data)
+    if (data.length > 0) {
+      setSelectedID(data[0].id)
+    }
   }, [])
+
+  useEffect(() => {
+    const index = students.findIndex((student) => student.id === selectedID)
+    if (index !== -1 && listRefs.current[index] && listRefs.current[index] !== null) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setToggleTop(listRefs.current[index]!.offsetTop)
+    }
+  }, [selectedID, students])
+
+  const handleClick = (id: string) => {
+    setSelectedID(id)
+  }
 
   return (
     <div className={cx('listWrap')}>
-      {students.map((student) => (
-        <div className={cx('list')} key={student.id}>
+      {students.map((student, index) => (
+        <button
+          ref={(ref) => (listRefs.current[index] = ref)}
+          className={cx('list', { selected: student.id === selectedID })}
+          key={student.id}
+          onClick={() => handleClick(student.id)}
+        >
           {student.name}
-        </div>
+        </button>
       ))}
+      <div className={cx('toggle')} style={{ top: toggleTop }} />
     </div>
   )
 }
