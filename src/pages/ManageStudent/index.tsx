@@ -34,13 +34,15 @@ const data = [
 const ManageStudentPage = () => {
   return (
     <FullScreen className={cx('manageStudentPage')}>
-      <Header menuTitle="학생관리" />
-      <main className={cx('chartWrap')}>
+      <Header menuTitle="학생 관리" />
+      <div className={cx('contents')}>
         <div className={cx('listWrap')}>
           <StudentList />
         </div>
-        <EmotionChart data={data} />
-      </main>
+        <main className={cx('chartWrap')}>
+          <EmotionChart data={data} />
+        </main>
+      </div>
     </FullScreen>
   )
 }
