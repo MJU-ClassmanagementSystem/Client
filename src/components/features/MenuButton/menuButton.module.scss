@@ -1,0 +1,19 @@
+@use 'src/styles/constants/colors' as color;
+
+.button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 194px;
+  height: 95px;
+  font-size: 20px;
+  font-weight: 600;
+  color: color.$PRIMARY;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.isActive {
+  background-color: color.$BACKGROUND;
+}
