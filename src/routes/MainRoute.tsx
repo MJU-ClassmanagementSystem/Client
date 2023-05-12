@@ -8,7 +8,7 @@ const MainRoute = () => {
     <Routes>
       <Route path="/manageStudent" element={<ManageStudent />} />
       <Route path="/manageClass" element={<ManageClassPage />} />
-      <Route path="/manageAttendance" element={<ManageAttendancePage />} />
+      <Route path="/manageAttendance/:week" element={<ManageAttendancePage />} />
     </Routes>
   )
 }
