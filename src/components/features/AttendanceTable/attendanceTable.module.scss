@@ -1,6 +1,7 @@
 @use 'src/styles/constants/colors' as color;
 
 .table {
+  width: fit-content;
   margin-top: 100px;
   border-collapse: separate;
   border: 1px solid color.$BORDER;

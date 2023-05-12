@@ -1,0 +1,13 @@
+@use 'src/styles/constants/colors' as color;
+
+.manageClassPage {
+  overflow: scroll;
+  background-color: color.$WHITE;
+
+  .chartWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+  }
+}
