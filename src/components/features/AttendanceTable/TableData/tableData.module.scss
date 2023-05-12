@@ -2,6 +2,8 @@
 
 .data {
   width: 170px;
+  min-width: 170px;
+  max-width: 170px;
   height: 80px;
   font-size: 23px;
   font-weight: 500;
