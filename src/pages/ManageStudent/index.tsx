@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 import EmotionChart from 'src/components/features/EmotionChart'
+import StudentList from 'src/components/features/StudentList'
 
 import styles from './main.module.scss'
 
@@ -31,8 +32,11 @@ const data = [
 const ManageStudentPage = () => {
   return (
     <div className={cx('manageStudentPage')}>
-      <h1 className={cx('pageTitle')}>학생관리</h1>
+      <h1 className={cx('pageTitle')}>학생 관리</h1>
       <div className={cx('weekSelectorWrap')} />
+      <div className={cx('listWrap')}>
+        <StudentList />
+      </div>
       <div className={cx('chartWrap')}>
         <EmotionChart data={data} />
       </div>
