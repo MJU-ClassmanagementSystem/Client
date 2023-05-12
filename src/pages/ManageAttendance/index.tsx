@@ -18,8 +18,6 @@ const ManageAttendancePage = () => {
   const asyncError = useThrowAsyncError()
   const [data, setData] = useState<GetAttendanceResponse>()
 
-  console.log(week)
-
   const fetchAttendance = useCallback(
     async (selectedWeek: number) => {
       try {
