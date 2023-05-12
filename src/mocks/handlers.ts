@@ -65,6 +65,39 @@ export const handlers = [
 
     if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
 
+    if (Number(week) === 1)
+      return res(
+        ctx.delay(100),
+        ctx.status(200),
+        ctx.json([
+          {
+            id: '1',
+            name: '김해찬',
+            attend: [0, 0, 0, 0, 1],
+          },
+          {
+            id: '2',
+            name: '홍길동',
+            attend: [0, 0, 0, 1, 0],
+          },
+          {
+            id: '2',
+            name: '김보현',
+            attend: [1, 1, 1, 0, 0],
+          },
+          {
+            id: '2',
+            name: '박은서',
+            attend: [0, 0, 0, 1, 0],
+          },
+          {
+            id: '2',
+            name: '차재환',
+            attend: [0, 0, 0, 0, 0],
+          },
+        ]),
+      )
+
     return res(
       ctx.delay(100),
       ctx.status(200),
