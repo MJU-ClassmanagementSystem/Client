@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { Dispatch, SetStateAction } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BoardIcon, ClassIcon, StudentIcon } from 'src/assets/svgs'
 import { MenuButtonType } from 'src/types'
 
@@ -7,13 +7,14 @@ import styles from './menuButton.module.scss'
 
 type MenuButtonProps = {
   isActive?: boolean
-  setMenu: Dispatch<SetStateAction<MenuButtonType>>
   type: MenuButtonType
 }
 
 const cx = classNames.bind(styles)
 
-const MenuButton = ({ isActive, type, setMenu }: MenuButtonProps) => {
+const MenuButton = ({ isActive, type }: MenuButtonProps) => {
+  const navigate = useNavigate()
+
   const icon = {
     manageClass: <ClassIcon />,
     manageStudent: <StudentIcon />,
@@ -27,7 +28,7 @@ const MenuButton = ({ isActive, type, setMenu }: MenuButtonProps) => {
   }[type]
 
   const handleClick = () => {
-    setMenu(type)
+    navigate(`${type}/1`)
   }
 
   return (

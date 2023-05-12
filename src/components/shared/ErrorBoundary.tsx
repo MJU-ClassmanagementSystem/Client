@@ -19,10 +19,6 @@ class ErrorBoundary extends React.Component<PropsWithChildren, State> {
     this.state = { hasError: false, message: '' }
   }
 
-  static getDerivedStateFromError() {
-    return
-  }
-
   componentDidCatch(error: Error) {
     toast.error(`${error.message}`)
   }

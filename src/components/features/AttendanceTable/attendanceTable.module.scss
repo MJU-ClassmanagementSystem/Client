@@ -1,0 +1,20 @@
+@use 'src/styles/constants/colors' as color;
+
+.table {
+  margin-top: 100px;
+  border-collapse: separate;
+  border: 1px solid color.$BORDER;
+  border-radius: 10px;
+
+  & tbody tr th {
+    border-right: 1px solid color.$BORDER;
+  }
+
+  & tbody tr td {
+    border-top: 1px solid color.$BORDER;
+  }
+
+  & tbody tr:first-child th {
+    border-top: 1px solid color.$BORDER;
+  }
+}

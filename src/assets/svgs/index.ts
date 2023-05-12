@@ -1,3 +1,5 @@
+export { ReactComponent as ArrowLeftIcon } from './arrowLeft.svg'
+export { ReactComponent as ArrowRightIcon } from './arrowRight.svg'
 export { ReactComponent as BoardIcon } from './board.svg'
 export { ReactComponent as ClassIcon } from './class.svg'
 export { ReactComponent as GraduationIcon } from './graduation.svg'
