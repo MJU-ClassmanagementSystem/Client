@@ -60,7 +60,13 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ data }) => {
     } as ApexOptions,
   }
   return (
-    <ApexCharts type="bar" options={state.options} series={state.series} height="630" />
+    <ApexCharts
+      type="bar"
+      options={state.options}
+      series={state.series}
+      height="630"
+      width="930px"
+    />
   )
 }
 

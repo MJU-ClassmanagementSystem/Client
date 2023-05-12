@@ -1,7 +1,9 @@
 import classNames from 'classnames/bind'
 import EmotionChart from 'src/components/features/EmotionChart'
+import FullScreen from 'src/components/layout/FullScreen'
+import Header from 'src/components/layout/Header'
 
-import styles from './main.module.scss'
+import styles from './manageStudent.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -30,13 +32,12 @@ const data = [
 
 const ManageStudentPage = () => {
   return (
-    <div className={cx('manageStudentPage')}>
-      <h1 className={cx('pageTitle')}>학생관리</h1>
-      <div className={cx('weekSelectorWrap')} />
-      <div className={cx('chartWrap')}>
+    <FullScreen className={cx('manageStudentPage')}>
+      <Header menuTitle="학생관리" />
+      <main className={cx('chartWrap')}>
         <EmotionChart data={data} />
-      </div>
-    </div>
+      </main>
+    </FullScreen>
   )
 }
 
