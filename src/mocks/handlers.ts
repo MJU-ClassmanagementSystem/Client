@@ -1,7 +1,11 @@
 import { faker } from '@faker-js/faker'
 import { rest } from 'msw'
 
-import { createAttendanceList } from './faker'
+import {
+  createAttendanceList,
+  createClassFocusList,
+  createStudentEmotionList,
+} from './faker'
 
 export const handlers = [
   rest.post('/login', async (req, res, ctx) => {
@@ -72,10 +76,30 @@ export const handlers = [
     if (Number(week) >= 1)
       return res(ctx.delay(100), ctx.status(200), ctx.json(attendanceList))
   }),
+
+  rest.get('/class/:week', async (req, res, ctx) => {
+    const { week } = req.params
+
+    if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
+
+    const classFocusList = createClassFocusList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(classFocusList))
+  }),
+
+  rest.get('/student/recess/:studentId/:week', async (req, res, ctx) => {
+    const { week, studentId } = req.params
+
+    if (!Number(week) || !Number(studentId)) return res(ctx.delay(100), ctx.status(400))
+
+    const studentEmotionList = createStudentEmotionList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(studentEmotionList))
+  }),
   //TODO: 작성 필요
   // rest.post('/register', null),
-  // rest.get('/class/1', null),
   // rest.get('/student/class/1/2', null),
-  // rest.get('/student/break/1/2', null),
   // rest.get('/attendance/', null),
 ]

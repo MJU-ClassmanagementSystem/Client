@@ -5,3 +5,5 @@ export type AttendanceList = {
   name: string
   attend: Attendance[]
 }[]
+
+export type Subject = '국어' | '수학' | '영어' | '과학'
