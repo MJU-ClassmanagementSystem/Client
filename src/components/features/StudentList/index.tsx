@@ -9,62 +9,22 @@ interface Student {
   teacherId: string
   parentId: string
 }
+
+interface StdentListProps {
+  students: Student[]
+}
 const cx = classNames.bind(styles)
 
-const StudentList = () => {
-  const [students, setStudents] = useState<Student[]>([])
+const StudentList = ({ students }: StdentListProps) => {
   const [selectedID, setSelectedID] = useState<string | null>(null)
   const [toggleTop, setToggleTop] = useState(0)
   const listRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   useEffect(() => {
-    const fetchData = () => {
-      return [
-        {
-          id: '1',
-          name: '김해찬',
-          teacherId: '1',
-          parentId: '1',
-        },
-        {
-          id: '2',
-          name: '홍길동',
-          teacherId: '1',
-          parentId: '1',
-        },
-        {
-          id: '3',
-          name: '홍길동',
-          teacherId: '1',
-          parentId: '1',
-        },
-        {
-          id: '4',
-          name: '홍길동',
-          teacherId: '1',
-          parentId: '1',
-        },
-        {
-          id: '5',
-          name: '홍길동',
-          teacherId: '1',
-          parentId: '1',
-        },
-        {
-          id: '6',
-          name: '홍길동',
-          teacherId: '1',
-          parentId: '1',
-        },
-      ]
+    if (students.length > 0) {
+      setSelectedID(students[0].id)
     }
-
-    const data = fetchData()
-    setStudents(data)
-    if (data.length > 0) {
-      setSelectedID(data[0].id)
-    }
-  }, [])
+  }, [students])
 
   useEffect(() => {
     const index = students.findIndex((student) => student.id === selectedID)
@@ -83,7 +43,7 @@ const StudentList = () => {
       {students.map((student, index) => (
         <button
           ref={(ref) => (listRefs.current[index] = ref)}
-          className={cx('list', { selected: student.id === selectedID })}
+          className={cx('list')}
           key={student.id}
           onClick={() => handleClick(student.id)}
         >

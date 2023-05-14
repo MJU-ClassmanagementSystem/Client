@@ -31,13 +31,52 @@ const data = [
   },
 ]
 
+const student = [
+  {
+    id: '1',
+    name: '김해찬',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '2',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '3',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '4',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '5',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '6',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+]
+
 const ManageStudentPage = () => {
   return (
     <FullScreen className={cx('manageStudentPage')}>
       <Header menuTitle="학생 관리" />
       <div className={cx('contents')}>
         <div className={cx('listWrap')}>
-          <StudentList />
+          <StudentList students={student} />
         </div>
         <main className={cx('chartWrap')}>
           <EmotionChart data={data} />
