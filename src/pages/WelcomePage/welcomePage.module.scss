@@ -1,0 +1,82 @@
+@use 'src/styles/constants/colors' as color;
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 200px;
+  padding: 50px;
+  font-size: 25px;
+  font-weight: 800;
+
+  h1 {
+    margin-top: 3px;
+    margin-left: 14px;
+
+    .coloredTitle {
+      color: color.$PRIMARY;
+    }
+  }
+}
+
+.welcomePage {
+  display: flex;
+  justify-content: space-between;
+
+  .leftWrap {
+    width: 570px;
+    margin-left: 130px;
+
+    .contentsWrap {
+      height: 720px;
+
+      .textWrap {
+        margin-top: 100px;
+
+        h2 {
+          margin: 16px;
+          font-size: 52px;
+          font-weight: 500;
+          line-height: 60px;
+
+          .boldText {
+            font-weight: 700;
+          }
+        }
+
+        p {
+          margin: 16px;
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 21px;
+        }
+      }
+
+      .buttonWrap {
+        margin-top: 57px;
+
+        button {
+          width: 205px;
+          height: 65px;
+          padding: 20px;
+          margin: 20px;
+          font-size: 20px;
+          font-weight: 500;
+          color: color.$WHITE;
+          background-color: color.$PRIMARY;
+        }
+      }
+
+      .signUp {
+        margin: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .imgWrap {
+    height: 600px;
+    margin-right: 100px;
+  }
+}
