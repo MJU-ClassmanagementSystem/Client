@@ -1,0 +1,15 @@
+@use 'src/styles/constants/colors' as color;
+
+.navigator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  .week {
+    margin: 0 43px;
+    font-size: 30px;
+    font-weight: 500;
+    color: color.$PRIMARY;
+  }
+}

@@ -1,7 +1,9 @@
 import classNames from 'classnames/bind'
+import FullScreen from 'src/components/layout/FullScreen'
+import Header from 'src/components/layout/Header'
 
 import Chart from '../../components/features/Chart'
-import styles from './main.module.scss'
+import styles from './manageClass.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -26,13 +28,12 @@ const chartData = [
 
 const ManageClassPage = () => {
   return (
-    <div className={cx('manageAttendancePage')}>
-      <h1 className={cx('pageTitle')}>수업 관리</h1>
-      <div className={cx('weekSelectorWrap')} />
-      <div className={cx('chartWrap')}>
+    <FullScreen className={cx('manageClassPage')}>
+      <Header menuTitle="수업관리" />
+      <main className={cx('chartWrap')}>
         <Chart data={chartData} categories={chartCategories} />
-      </div>
-    </div>
+      </main>
+    </FullScreen>
   )
 }
 

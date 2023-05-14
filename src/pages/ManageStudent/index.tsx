@@ -1,7 +1,10 @@
 import classNames from 'classnames/bind'
 import EmotionChart from 'src/components/features/EmotionChart'
+import StudentList from 'src/components/features/StudentList'
+import FullScreen from 'src/components/layout/FullScreen'
+import Header from 'src/components/layout/Header'
 
-import styles from './main.module.scss'
+import styles from './manageStudent.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -28,15 +31,58 @@ const data = [
   },
 ]
 
+const student = [
+  {
+    id: '1',
+    name: '김해찬',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '2',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '3',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '4',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '5',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+  {
+    id: '6',
+    name: '홍길동',
+    teacherId: '1',
+    parentId: '1',
+  },
+]
+
 const ManageStudentPage = () => {
   return (
-    <div className={cx('manageStudentPage')}>
-      <h1 className={cx('pageTitle')}>학생관리</h1>
-      <div className={cx('weekSelectorWrap')} />
-      <div className={cx('chartWrap')}>
-        <EmotionChart data={data} />
+    <FullScreen className={cx('manageStudentPage')}>
+      <Header menuTitle="학생 관리" />
+      <div className={cx('contents')}>
+        <div className={cx('listWrap')}>
+          <StudentList students={student} />
+        </div>
+        <main className={cx('chartWrap')}>
+          <EmotionChart data={data} />
+        </main>
       </div>
-    </div>
+    </FullScreen>
   )
 }
 
