@@ -1,4 +1,11 @@
+import { faker } from '@faker-js/faker'
 import { rest } from 'msw'
+
+import {
+  createAttendanceList,
+  createClassFocusList,
+  createStudentEmotionList,
+} from './faker'
 
 export const handlers = [
   rest.post('/login', async (req, res, ctx) => {
@@ -16,8 +23,7 @@ export const handlers = [
       ctx.delay(100),
       ctx.status(200),
       ctx.json({
-        accessToken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNjY2NjcwNDQ0LCJleHAiOjE2NjY3NTY4NDR9.G2o4ffsAtGeJvRNTT7RPJCSeKoKNcaBKJ4Tm5WuBZWg',
+        accessToken: faker.string.sample(20),
       }),
     )
   }),
@@ -65,75 +71,35 @@ export const handlers = [
 
     if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
 
-    if (Number(week) === 1)
-      return res(
-        ctx.delay(100),
-        ctx.status(200),
-        ctx.json([
-          {
-            id: '1',
-            name: '김해찬',
-            attend: [0, 0, 0, 0, 1],
-          },
-          {
-            id: '2',
-            name: '홍길동',
-            attend: [0, 0, 0, 1, 0],
-          },
-          {
-            id: '2',
-            name: '김보현',
-            attend: [1, 1, 1, 0, 0],
-          },
-          {
-            id: '2',
-            name: '박은서',
-            attend: [0, 0, 0, 1, 0],
-          },
-          {
-            id: '2',
-            name: '차재환',
-            attend: [0, 0, 0, 0, 0],
-          },
-        ]),
-      )
+    const attendanceList = createAttendanceList()
 
-    return res(
-      ctx.delay(100),
-      ctx.status(200),
-      ctx.json([
-        {
-          id: '1',
-          name: '김해찬',
-          attend: [1, 0, 1, 2, 1],
-        },
-        {
-          id: '2',
-          name: '홍길동',
-          attend: [2, 2, 0, 1, 0],
-        },
-        {
-          id: '2',
-          name: '김보현',
-          attend: [0, 0, 0, 0, 0],
-        },
-        {
-          id: '2',
-          name: '박은서',
-          attend: [2, 2, 0, 1, 0],
-        },
-        {
-          id: '2',
-          name: '차재환',
-          attend: [0, 0, 0, 0, 0],
-        },
-      ]),
-    )
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(attendanceList))
+  }),
+
+  rest.get('/class/:week', async (req, res, ctx) => {
+    const { week } = req.params
+
+    if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
+
+    const classFocusList = createClassFocusList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(classFocusList))
+  }),
+
+  rest.get('/student/recess/:studentId/:week', async (req, res, ctx) => {
+    const { week, studentId } = req.params
+
+    if (!Number(week) || !Number(studentId)) return res(ctx.delay(100), ctx.status(400))
+
+    const studentEmotionList = createStudentEmotionList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(studentEmotionList))
   }),
   //TODO: 작성 필요
   // rest.post('/register', null),
-  // rest.get('/class/1', null),
   // rest.get('/student/class/1/2', null),
-  // rest.get('/student/break/1/2', null),
   // rest.get('/attendance/', null),
 ]
