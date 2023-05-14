@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import { useNavigate } from 'react-router-dom'
 import { BoardIcon, ClassIcon, StudentIcon } from 'src/assets/svgs'
-import { MenuButtonType } from 'src/types'
+import type { MenuButtonType } from 'src/types'
 
 import styles from './menuButton.module.scss'
 
@@ -28,7 +28,7 @@ const MenuButton = ({ isActive, type }: MenuButtonProps) => {
   }[type]
 
   const handleClick = () => {
-    navigate(`${type}/1`)
+    navigate(`${type}`)
   }
 
   return (

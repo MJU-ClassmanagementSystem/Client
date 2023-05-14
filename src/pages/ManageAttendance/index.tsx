@@ -7,7 +7,7 @@ import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
 import classManagement from 'src/service/classManagement'
-import { GetAttendanceResponse } from 'src/types/axios'
+import type { GetAttendanceResponse } from 'src/types/axios'
 
 import styles from './manageAttendance.module.scss'
 
@@ -19,9 +19,9 @@ const ManageAttendancePage = () => {
   const [data, setData] = useState<GetAttendanceResponse>()
 
   const fetchAttendance = useCallback(
-    async (selectedWeek: number) => {
+    async (selectedWeek: string) => {
       try {
-        const { data } = await classManagement.getAttendance(Number(selectedWeek))
+        const { data } = await classManagement.getAttendance(selectedWeek)
         setData(data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
@@ -32,7 +32,7 @@ const ManageAttendancePage = () => {
   )
 
   useEffect(() => {
-    fetchAttendance(Number(week))
+    fetchAttendance(week || '1')
   }, [fetchAttendance, week])
 
   return (
