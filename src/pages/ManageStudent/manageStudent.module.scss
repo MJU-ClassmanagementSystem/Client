@@ -6,6 +6,39 @@
   overflow: scroll;
   background-color: color.$WHITE;
 
+  .buttonWrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 80px;
+
+    button {
+      width: 172px;
+      height: 58px;
+      font-size: 20px;
+      font-weight: 600;
+      border: 1px solid color.$BORDER;
+      border-radius: 10px 0 0 10px;
+
+      &:hover {
+        background-color: color.$ACTIVE;
+      }
+
+      &:last-child {
+        margin-right: 100px;
+        margin-left: -2px;
+        border-radius: 0 10px 10px 0;
+      }
+    }
+  }
+
+  .activeButton {
+    background-color: color.$ACTIVE;
+  }
+
+  .inactiveButton {
+    background-color: color.$WHITE;
+  }
+
   .contents {
     display: flex;
 

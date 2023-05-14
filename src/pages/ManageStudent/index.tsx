@@ -1,4 +1,6 @@
 import classNames from 'classnames/bind'
+import { useState } from 'react'
+import Chart from 'src/components/features/Chart'
 import EmotionChart from 'src/components/features/EmotionChart'
 import StudentList from 'src/components/features/StudentList'
 import FullScreen from 'src/components/layout/FullScreen'
@@ -70,16 +72,59 @@ const student = [
   },
 ]
 
+const chartCategories = ['월', '화', '수', '목', '금']
+const chartData = [
+  {
+    subjectName: '수학',
+    focusRate: [35.0, 30.5, 13.0, 14.0, 15.0],
+    interestRate: [12.0, 64.5, 36.0, 28.0, 84.0],
+  },
+  {
+    subjectName: '과학',
+    focusRate: [35.0, 30.5, 13.0, 14.0, 15.0],
+    interestRate: [6.0, 34.5, 64.0, 36.0, 64.0],
+  },
+  {
+    subjectName: '영어',
+    focusRate: [76.0, 74.5, 45.0, 63.0, 15.0],
+    interestRate: [76.0, 45.5, 15.0, 14.0, 63.0],
+  },
+]
+
 const ManageStudentPage = () => {
+  const [chartVisible, setChartVisible] = useState('chart')
   return (
     <FullScreen className={cx('manageStudentPage')}>
       <Header menuTitle="학생 관리" />
+      <div className={cx('buttonWrap')}>
+        <button
+          className={cx('button', {
+            activeButton: chartVisible === 'chart',
+            inactiveButton: chartVisible !== 'chart',
+          })}
+          onClick={() => setChartVisible('chart')}
+        >
+          수업 시간
+        </button>
+        <button
+          className={cx('button', {
+            activeButton: chartVisible === 'emotion',
+            inactiveButton: chartVisible !== 'emotion',
+          })}
+          onClick={() => setChartVisible('emotion')}
+        >
+          학교 생활
+        </button>
+      </div>
       <div className={cx('contents')}>
         <div className={cx('listWrap')}>
           <StudentList students={student} />
         </div>
         <main className={cx('chartWrap')}>
-          <EmotionChart data={data} />
+          {chartVisible === 'emotion' && <EmotionChart data={data} />}
+          {chartVisible === 'chart' && (
+            <Chart data={chartData} categories={chartCategories} />
+          )}
         </main>
       </div>
     </FullScreen>
