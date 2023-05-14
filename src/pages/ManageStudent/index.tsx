@@ -1,10 +1,6 @@
 import classNames from 'classnames/bind'
-import { useState } from 'react'
-import Chart from 'src/components/features/Chart'
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import EmotionChart from 'src/components/features/EmotionChart'
-import StudentList from 'src/components/features/StudentList'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
@@ -14,8 +10,6 @@ import { EmotionData } from 'src/types'
 import styles from './manageStudent.module.scss'
 
 const cx = classNames.bind(styles)
-
-
 
 const student = [
   {
@@ -81,7 +75,6 @@ const ManageStudentPage = () => {
   const [data, setData] = useState<EmotionData[]>()
   const [chartVisible, setChartVisible] = useState('chart')
 
-    
   const fetchStudentEmotionList = useCallback(
     async (selectedWeek: number, selectedStudent: number) => {
       try {
@@ -125,6 +118,7 @@ const ManageStudentPage = () => {
           학교 생활
         </button>
       </div>
+    </FullScreen>
   )
 }
 
