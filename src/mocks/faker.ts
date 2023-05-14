@@ -136,7 +136,7 @@ export const createStudentEmotionList = (): GetStudentEmotionListResponse => {
 
 export const createStudentList = (): GetStudentListResponse => {
   return Array.from({ length: 8 }, () => ({
-    id: faker.string.numeric({ length: 10 }),
+    id: faker.string.numeric({ length: 2 }),
     name: faker.person.firstName(),
     parentId: faker.string.numeric(),
     teacherId: faker.string.numeric(),

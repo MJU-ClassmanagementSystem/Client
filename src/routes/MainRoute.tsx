@@ -12,6 +12,7 @@ const MainRoute = () => {
       <Route path="/manageStudent/:studentId/:week" element={<ManageStudent />} />
       <Route path="/manageClass/:week" element={<ManageClassPage />} />
       <Route path="/manageAttendance/:week" element={<ManageAttendancePage />} />
+      <Route path="*" element={<Navigate to="/404" />} />
     </Routes>
   )
 }
