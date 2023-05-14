@@ -2,10 +2,11 @@ import { ApexOptions } from 'apexcharts'
 import classNames from 'classnames/bind'
 import { useEffect, useState } from 'react'
 import ApexCharts from 'react-apexcharts'
+import { ChartData } from 'src/types'
 
 import styles from './chart.module.scss'
 
-interface ChartData {
+interface Chart {
   subjectName: string
   options: ApexOptions
   series: {
@@ -15,21 +16,17 @@ interface ChartData {
 }
 
 interface ChartProps {
-  data: {
-    subjectName: string
-    focusRate: number[]
-    interestRate: number[]
-  }[]
+  data: ChartData[]
   categories: string[]
 }
 
 const cx = classNames.bind(styles)
 
 const Chart: React.FC<ChartProps> = ({ data, categories }) => {
-  const [chartsData, setChartsData] = useState<ChartData[]>([])
+  const [chartsData, setChartsData] = useState<Chart[]>([])
 
   useEffect(() => {
-    const newChartData: ChartData[] = data.map((item) => ({
+    const newChartData: Chart[] = data.map((item) => ({
       subjectName: item.subjectName,
       options: {
         chart: {
@@ -65,7 +62,7 @@ const Chart: React.FC<ChartProps> = ({ data, categories }) => {
 
   return (
     <div>
-      {chartsData.map((chart: ChartData) => (
+      {chartsData.map((chart: Chart) => (
         <div className={cx('chartWrap')} key={chart.subjectName}>
           <h3 className={cx('chartTitle')}>{chart.subjectName}</h3>
           <ApexCharts

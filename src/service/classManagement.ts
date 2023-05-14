@@ -1,5 +1,10 @@
 import { AxiosPromise } from 'axios'
-import { GetAttendanceResponse, LoginResponse } from 'src/types/axios'
+import {
+  GetAttendanceResponse,
+  GetClassFocusListResponse,
+  GetStudentEmotionListResponse,
+  LoginResponse,
+} from 'src/types/axios'
 import Axios from 'src/utils/axios'
 
 export default {
@@ -91,6 +96,34 @@ export default {
     return Axios({
       method: 'get',
       url: `/student/${week}`,
+    })
+  },
+
+  /**
+   * 반의 집중도를 가져오는 api
+   * @param week 해당하는 주차
+   * @returns
+   */
+  getClassFocusList(week: number): AxiosPromise<GetClassFocusListResponse> {
+    return Axios({
+      method: 'get',
+      url: `/class/${week}`,
+    })
+  },
+
+  /**
+   * 학생의 감정을 가져오는 api
+   * @param week 해당하는 주차
+   * @param studentId 학번
+   * @returns
+   */
+  getStudentEmotionList(
+    week: number,
+    studentId: number,
+  ): AxiosPromise<GetStudentEmotionListResponse> {
+    return Axios({
+      method: 'get',
+      url: `/student/recess/${studentId}/${week}`,
     })
   },
 }

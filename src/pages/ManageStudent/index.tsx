@@ -1,37 +1,21 @@
 import classNames from 'classnames/bind'
 import { useState } from 'react'
 import Chart from 'src/components/features/Chart'
+import { useCallback, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import EmotionChart from 'src/components/features/EmotionChart'
 import StudentList from 'src/components/features/StudentList'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
+import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
+import classManagement from 'src/service/classManagement'
+import { EmotionData } from 'src/types'
 
 import styles from './manageStudent.module.scss'
 
 const cx = classNames.bind(styles)
 
-const data = [
-  {
-    day: 0,
-    emotionList: [6.0, 7.0, 8.0, 9.0, 10.0],
-  },
-  {
-    day: 1,
-    emotionList: [6.0, 7.0, 8.0, 9.0, 10.0],
-  },
-  {
-    day: 2,
-    emotionList: [6.0, 7.0, 8.0, 9.0, 10.0],
-  },
-  {
-    day: 3,
-    emotionList: [6.0, 7.0, 8.0, 9.0, 10.0],
-  },
-  {
-    day: 4,
-    emotionList: [6.0, 7.0, 8.0, 9.0, 10.0],
-  },
-]
+
 
 const student = [
   {
@@ -92,7 +76,32 @@ const chartData = [
 ]
 
 const ManageStudentPage = () => {
+  const { week, studentId } = useParams()
+  const asyncError = useThrowAsyncError()
+  const [data, setData] = useState<EmotionData[]>()
   const [chartVisible, setChartVisible] = useState('chart')
+
+    
+  const fetchStudentEmotionList = useCallback(
+    async (selectedWeek: number, selectedStudent: number) => {
+      try {
+        const { data } = await classManagement.getStudentEmotionList(
+          Number(selectedWeek),
+          Number(selectedStudent),
+        )
+        setData(data)
+      } catch (error) {
+        if (error instanceof Error) asyncError(error)
+        console.error(error)
+      }
+    },
+    [asyncError],
+  )
+
+  useEffect(() => {
+    fetchStudentEmotionList(Number(week), Number(studentId))
+  }, [fetchStudentEmotionList, studentId, week])
+
   return (
     <FullScreen className={cx('manageStudentPage')}>
       <Header menuTitle="학생 관리" />
@@ -116,18 +125,6 @@ const ManageStudentPage = () => {
           학교 생활
         </button>
       </div>
-      <div className={cx('contents')}>
-        <div className={cx('listWrap')}>
-          <StudentList students={student} />
-        </div>
-        <main className={cx('chartWrap')}>
-          {chartVisible === 'emotion' && <EmotionChart data={data} />}
-          {chartVisible === 'chart' && (
-            <Chart data={chartData} categories={chartCategories} />
-          )}
-        </main>
-      </div>
-    </FullScreen>
   )
 }
 
