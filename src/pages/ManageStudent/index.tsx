@@ -1,79 +1,27 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Chart from 'src/components/features/Chart'
+import EmotionChart from 'src/components/features/EmotionChart'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
 import classManagement from 'src/service/classManagement'
-import { EmotionData } from 'src/types'
+import { ChartData, EmotionData } from 'src/types'
 
 import styles from './manageStudent.module.scss'
 
 const cx = classNames.bind(styles)
 
-const student = [
-  {
-    id: '1',
-    name: '김해찬',
-    teacherId: '1',
-    parentId: '1',
-  },
-  {
-    id: '2',
-    name: '홍길동',
-    teacherId: '1',
-    parentId: '1',
-  },
-  {
-    id: '3',
-    name: '홍길동',
-    teacherId: '1',
-    parentId: '1',
-  },
-  {
-    id: '4',
-    name: '홍길동',
-    teacherId: '1',
-    parentId: '1',
-  },
-  {
-    id: '5',
-    name: '홍길동',
-    teacherId: '1',
-    parentId: '1',
-  },
-  {
-    id: '6',
-    name: '홍길동',
-    teacherId: '1',
-    parentId: '1',
-  },
-]
-
 const chartCategories = ['월', '화', '수', '목', '금']
-const chartData = [
-  {
-    subjectName: '수학',
-    focusRate: [35.0, 30.5, 13.0, 14.0, 15.0],
-    interestRate: [12.0, 64.5, 36.0, 28.0, 84.0],
-  },
-  {
-    subjectName: '과학',
-    focusRate: [35.0, 30.5, 13.0, 14.0, 15.0],
-    interestRate: [6.0, 34.5, 64.0, 36.0, 64.0],
-  },
-  {
-    subjectName: '영어',
-    focusRate: [76.0, 74.5, 45.0, 63.0, 15.0],
-    interestRate: [76.0, 45.5, 15.0, 14.0, 63.0],
-  },
-]
 
 const ManageStudentPage = () => {
   const { week, studentId } = useParams()
   const asyncError = useThrowAsyncError()
-  const [data, setData] = useState<EmotionData[]>()
-  const [chartVisible, setChartVisible] = useState('chart')
+  const [emotionData, setEmotionData] = useState<EmotionData[]>()
+  const [chartData, setChartData] = useState<ChartData[]>()
+
+  const [visibleChart, setVisibleChart] = useState<'chart' | 'emotion'>('chart')
 
   const fetchStudentEmotionList = useCallback(
     async (selectedWeek: number, selectedStudent: number) => {
@@ -82,7 +30,20 @@ const ManageStudentPage = () => {
           Number(selectedWeek),
           Number(selectedStudent),
         )
-        setData(data)
+        setEmotionData(data)
+      } catch (error) {
+        if (error instanceof Error) asyncError(error)
+        console.error(error)
+      }
+    },
+    [asyncError],
+  )
+
+  const fetchClassFocusList = useCallback(
+    async (selectedWeek: number) => {
+      try {
+        const { data } = await classManagement.getClassFocusList(Number(selectedWeek))
+        setChartData(data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
         console.error(error)
@@ -95,29 +56,46 @@ const ManageStudentPage = () => {
     fetchStudentEmotionList(Number(week), Number(studentId))
   }, [fetchStudentEmotionList, studentId, week])
 
+  useEffect(() => {
+    fetchClassFocusList(Number(week))
+  }, [fetchClassFocusList, week])
+
+  let chart
+
+  switch (visibleChart) {
+    case 'emotion':
+      chart = emotionData && <EmotionChart data={emotionData} />
+      break
+
+    case 'chart':
+      chart = chartData && <Chart categories={chartCategories} data={chartData} />
+      break
+  }
+
   return (
     <FullScreen className={cx('manageStudentPage')}>
       <Header menuTitle="학생 관리" />
       <div className={cx('buttonWrap')}>
         <button
           className={cx('button', {
-            activeButton: chartVisible === 'chart',
-            inactiveButton: chartVisible !== 'chart',
+            activeButton: visibleChart === 'chart',
+            inactiveButton: visibleChart !== 'chart',
           })}
-          onClick={() => setChartVisible('chart')}
+          onClick={() => setVisibleChart('chart')}
         >
           수업 시간
         </button>
         <button
           className={cx('button', {
-            activeButton: chartVisible === 'emotion',
-            inactiveButton: chartVisible !== 'emotion',
+            activeButton: visibleChart === 'emotion',
+            inactiveButton: visibleChart !== 'emotion',
           })}
-          onClick={() => setChartVisible('emotion')}
+          onClick={() => setVisibleChart('emotion')}
         >
           학교 생활
         </button>
       </div>
+      <main className={cx('chartWrap')}>{chart}</main>
     </FullScreen>
   )
 }
