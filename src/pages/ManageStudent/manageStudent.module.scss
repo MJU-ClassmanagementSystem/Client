@@ -6,10 +6,18 @@
   overflow: scroll;
   background-color: color.$WHITE;
 
-  .chartWrap {
+  .contents {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 35px;
+
+    .listWrap {
+      margin-right: 20px;
+    }
+
+    .chartWrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 35px 35px;
+    }
   }
 }
