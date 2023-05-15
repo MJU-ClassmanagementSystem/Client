@@ -12,7 +12,7 @@ export const authState = atom({
 export const modalState = atom({
   key: 'modal',
   default: {
-    isOpened: true,
+    isOpened: false,
     name: '',
   },
 })
