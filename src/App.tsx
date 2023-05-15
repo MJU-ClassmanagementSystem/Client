@@ -16,12 +16,12 @@ const App = () => {
       <Route path="signIn" element={<SignInPage />} />
       <Route path="signUp" element={<SignUpPage />} />
       <Route path="registerUserFace" element={<RegisterUserFacePage />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
           <Route path="*" element={<MainRoute />} />
         </Route>
       </Route>
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="404" element={<NotFoundPage />} />
     </Routes>
   )
 }

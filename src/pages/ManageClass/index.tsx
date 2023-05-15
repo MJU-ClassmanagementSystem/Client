@@ -5,7 +5,7 @@ import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
 import classManagement from 'src/service/classManagement'
-import { ChartData } from 'src/types'
+import type { ChartData } from 'src/types'
 
 import Chart from '../../components/features/Chart'
 import styles from './manageClass.module.scss'
@@ -20,9 +20,9 @@ const ManageClassPage = () => {
   const [data, setData] = useState<ChartData[]>()
 
   const fetchClassFocusList = useCallback(
-    async (selectedWeek: number) => {
+    async (selectedWeek: string) => {
       try {
-        const { data } = await classManagement.getClassFocusList(Number(selectedWeek))
+        const { data } = await classManagement.getClassFocusList(selectedWeek)
         setData(data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
@@ -33,7 +33,7 @@ const ManageClassPage = () => {
   )
 
   useEffect(() => {
-    fetchClassFocusList(Number(week))
+    fetchClassFocusList(week || '1')
   }, [fetchClassFocusList, week])
 
   return (

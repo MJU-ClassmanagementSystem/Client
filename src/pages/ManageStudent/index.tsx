@@ -3,32 +3,31 @@ import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Chart from 'src/components/features/Chart'
 import EmotionChart from 'src/components/features/EmotionChart'
+import StudentList from 'src/components/features/StudentList'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
 import classManagement from 'src/service/classManagement'
-import { ChartData, EmotionData } from 'src/types'
+import type { ChartData, EmotionData, Student } from 'src/types'
 
 import styles from './manageStudent.module.scss'
 
 const cx = classNames.bind(styles)
-
-const chartCategories = ['월', '화', '수', '목', '금']
 
 const ManageStudentPage = () => {
   const { week, studentId } = useParams()
   const asyncError = useThrowAsyncError()
   const [emotionData, setEmotionData] = useState<EmotionData[]>()
   const [chartData, setChartData] = useState<ChartData[]>()
-
+  const [studentsData, setStudentsData] = useState<Student[]>()
   const [visibleChart, setVisibleChart] = useState<'chart' | 'emotion'>('chart')
 
   const fetchStudentEmotionList = useCallback(
-    async (selectedWeek: number, selectedStudent: number) => {
+    async (selectedWeek: string, selectedStudent: string) => {
       try {
         const { data } = await classManagement.getStudentEmotionList(
-          Number(selectedWeek),
-          Number(selectedStudent),
+          selectedWeek,
+          selectedStudent,
         )
         setEmotionData(data)
       } catch (error) {
@@ -40,9 +39,12 @@ const ManageStudentPage = () => {
   )
 
   const fetchClassFocusList = useCallback(
-    async (selectedWeek: number) => {
+    async (selectedWeek: string, selectedStudent: string) => {
       try {
-        const { data } = await classManagement.getClassFocusList(Number(selectedWeek))
+        const { data } = await classManagement.getStudentFocusList(
+          selectedWeek,
+          selectedStudent,
+        )
         setChartData(data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
@@ -52,13 +54,27 @@ const ManageStudentPage = () => {
     [asyncError],
   )
 
+  const fetchStudentList = useCallback(async () => {
+    try {
+      const { data } = await classManagement.getStudentList()
+      setStudentsData(data)
+    } catch (error) {
+      if (error instanceof Error) asyncError(error)
+      console.error(error)
+    }
+  }, [asyncError])
+
   useEffect(() => {
-    fetchStudentEmotionList(Number(week), Number(studentId))
+    fetchStudentEmotionList(week || '1', studentId || '1')
   }, [fetchStudentEmotionList, studentId, week])
 
   useEffect(() => {
-    fetchClassFocusList(Number(week))
-  }, [fetchClassFocusList, week])
+    fetchClassFocusList(week || '1', studentId || '1')
+  }, [fetchClassFocusList, studentId, week])
+
+  useEffect(() => {
+    fetchStudentList()
+  }, [fetchStudentList])
 
   let chart
 
@@ -68,7 +84,7 @@ const ManageStudentPage = () => {
       break
 
     case 'chart':
-      chart = chartData && <Chart categories={chartCategories} data={chartData} />
+      chart = chartData && <Chart data={chartData} />
       break
   }
 
@@ -95,7 +111,12 @@ const ManageStudentPage = () => {
           학교 생활
         </button>
       </div>
-      <main className={cx('chartWrap')}>{chart}</main>
+      <main className={cx('chartWrap')}>
+        <div className={cx('selector')}>
+          {studentsData && <StudentList students={studentsData} />}
+        </div>
+        {chart}
+      </main>
     </FullScreen>
   )
 }

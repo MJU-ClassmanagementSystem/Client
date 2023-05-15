@@ -5,6 +5,8 @@ import {
   createAttendanceList,
   createClassFocusList,
   createStudentEmotionList,
+  createStudentFocusList,
+  createStudentList,
 } from './faker'
 
 export const handlers = [
@@ -91,13 +93,31 @@ export const handlers = [
   rest.get('/student/recess/:studentId/:week', async (req, res, ctx) => {
     const { week, studentId } = req.params
 
-    if (!Number(week) || !Number(studentId)) return res(ctx.delay(100), ctx.status(400))
+    if (!Number(week) || !studentId) return res(ctx.delay(100), ctx.status(400))
 
     const studentEmotionList = createStudentEmotionList()
 
     if (Number(week) >= 1)
       return res(ctx.delay(100), ctx.status(200), ctx.json(studentEmotionList))
   }),
+
+  rest.get('/student/class/:studentId/:week', async (req, res, ctx) => {
+    const { week, studentId } = req.params
+
+    if (!Number(week) || !studentId) return res(ctx.delay(100), ctx.status(400))
+
+    const studentEmotionList = createStudentFocusList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(studentEmotionList))
+  }),
+
+  rest.get('/student', async (_, res, ctx) => {
+    const studentList = createStudentList()
+
+    return res(ctx.delay(100), ctx.status(200), ctx.json(studentList))
+  }),
+
   //TODO: 작성 필요
   // rest.post('/register', null),
   // rest.get('/student/class/1/2', null),

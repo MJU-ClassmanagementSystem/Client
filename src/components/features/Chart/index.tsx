@@ -2,7 +2,7 @@ import { ApexOptions } from 'apexcharts'
 import classNames from 'classnames/bind'
 import { useEffect, useState } from 'react'
 import ApexCharts from 'react-apexcharts'
-import { ChartData } from 'src/types'
+import type { ChartData } from 'src/types'
 
 import styles from './chart.module.scss'
 
@@ -17,12 +17,15 @@ interface Chart {
 
 interface ChartProps {
   data: ChartData[]
-  categories: string[]
+  categories?: string[]
 }
 
 const cx = classNames.bind(styles)
 
-const Chart: React.FC<ChartProps> = ({ data, categories }) => {
+const Chart: React.FC<ChartProps> = ({
+  data,
+  categories = ['월', '화', '수', '목', '금'],
+}) => {
   const [chartsData, setChartsData] = useState<Chart[]>([])
 
   useEffect(() => {

@@ -1,14 +1,9 @@
 import classNames from 'classnames/bind'
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
+import type { Student } from 'src/types'
 
 import styles from './student.module.scss'
-
-interface Student {
-  id: string
-  name: string
-  teacherId: string
-  parentId: string
-}
 
 interface StdentListProps {
   students: Student[]
@@ -16,26 +11,22 @@ interface StdentListProps {
 const cx = classNames.bind(styles)
 
 const StudentList = ({ students }: StdentListProps) => {
-  const [selectedID, setSelectedID] = useState<string | null>(null)
+  const navigate = useNavigate()
+  const { studentId, week } = useParams()
   const [toggleTop, setToggleTop] = useState(0)
   const listRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   useEffect(() => {
-    if (students.length > 0) {
-      setSelectedID(students[0].id)
-    }
-  }, [students])
-
-  useEffect(() => {
-    const index = students.findIndex((student) => student.id === selectedID)
+    const index = students.findIndex((student) => student.id === studentId)
+    console.log('index', index)
     if (index !== -1 && listRefs.current[index] && listRefs.current[index] !== null) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setToggleTop(listRefs.current[index]!.offsetTop)
     }
-  }, [selectedID, students])
+  }, [studentId, students])
 
   const handleClick = (id: string) => {
-    setSelectedID(id)
+    navigate(`/manageStudent/${id}/${week}`)
   }
 
   return (

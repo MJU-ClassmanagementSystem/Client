@@ -25,7 +25,11 @@ const WeekNavigator = () => {
 
   const handleToPrevWeek = () => {
     if (!week) return
-    const newUrl = pathname.replace(week, String(Number(week) + 1))
+    const newUrl = pathname
+      .split('/')
+      .slice(0, -1)
+      .join('/')
+      .concat('/' + String(Number(week) + 1))
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7))
     navigate(newUrl)
   }
@@ -33,9 +37,12 @@ const WeekNavigator = () => {
   const handleToNextWeek = () => {
     if (!week) return
     if (Number(week) <= 1) return
-    const newUrl = pathname.replace(week, String(Number(week) - 1))
+    const newUrl = pathname
+      .split('/')
+      .slice(0, -1)
+      .join('/')
+      .concat('/' + String(Number(week) + 1))
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7))
-
     navigate(newUrl)
   }
 
