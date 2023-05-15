@@ -14,9 +14,10 @@
   }
 
   .camera {
-    width: 80%;
-    height: 60%;
+    width: 900px;
+    aspect-ratio: 4/3;
     background-color: gray;
+    transform: scale(-1, 1);
   }
 
   .form {
