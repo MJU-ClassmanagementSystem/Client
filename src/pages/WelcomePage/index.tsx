@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind'
 import { useNavigate } from 'react-router-dom'
+import welcomeImg from 'src/assets/images/welcome.png'
+import { LogoIcon } from 'src/assets/svgs'
 import LoginButton from 'src/components/features/LoginButton'
 
-import welcomeImg from '../../assets/images/welcome.png'
-import { LogoIcon } from '../../assets/svgs'
 import styles from './welcomePage.module.scss'
 
 const cx = classNames.bind(styles)
