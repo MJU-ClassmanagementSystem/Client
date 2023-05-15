@@ -8,3 +8,11 @@ export const authState = atom({
   default: '',
   effects_UNSTABLE: [persistAtom],
 })
+
+export const modalState = atom({
+  key: 'modal',
+  default: {
+    isOpened: true,
+    name: '',
+  },
+})

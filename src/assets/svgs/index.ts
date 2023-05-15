@@ -1,3 +1,4 @@
+export { ReactComponent as AlertIcon } from './alert.svg'
 export { ReactComponent as ArrowLeftIcon } from './arrowLeft.svg'
 export { ReactComponent as ArrowRightIcon } from './arrowRight.svg'
 export { ReactComponent as BoardIcon } from './board.svg'
