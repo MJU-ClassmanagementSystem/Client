@@ -38,7 +38,7 @@ const ManageClassPage = () => {
 
   return (
     <FullScreen className={cx('manageClassPage')}>
-      <Header menuTitle="수업관리" />
+      <Header menuTitle="수업 관리" />
       <main className={cx('chartWrap')}>
         {data && <Chart data={data} categories={chartCategories} />}
       </main>
