@@ -5,7 +5,7 @@
   align-items: center;
   height: 200px;
   padding: 50px;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 800;
 
   h1 {
@@ -18,56 +18,67 @@
   }
 }
 
-.welcomePage {
+.pageWrap {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 
-  .leftWrap {
-    width: 570px;
-    margin-left: 130px;
+  .welcomePage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 2000px;
+    height: 70vh;
 
-    .contentsWrap {
-      height: 720px;
+    .leftWrap {
+      width: 570px;
+      margin-right: 200px;
 
-      .textWrap {
-        margin-top: 100px;
+      @media (width >= 1000px) {
+        margin-right: 240px;
+      }
 
-        h2 {
-          margin: 16px;
-          font-size: 52px;
-          font-weight: 500;
-          line-height: 60px;
+      .contentsWrap {
+        .textWrap {
+          margin-top: 100px;
 
-          .boldText {
-            font-weight: 700;
+          h2 {
+            margin: 16px;
+            font-size: 70px;
+            font-weight: 500;
+            line-height: 78px;
+
+            .boldText {
+              font-weight: 700;
+            }
+          }
+
+          p {
+            margin: 16px;
+            margin-top: 30px;
+            font-size: 25px;
+            font-weight: 500;
+            line-height: 31px;
           }
         }
 
-        p {
-          margin: 16px;
-          margin-top: 30px;
-          font-size: 20px;
-          font-weight: 500;
-          line-height: 21px;
+        .buttonWrap {
+          display: flex;
+          margin-top: 57px;
+        }
+
+        .signUp {
+          margin: 20px;
+          font-size: 18px;
+          font-weight: 600;
+          text-decoration: underline;
         }
       }
-
-      .buttonWrap {
-        display: flex;
-        margin-top: 57px;
-      }
-
-      .signUp {
-        margin: 20px;
-        font-size: 18px;
-        font-weight: 600;
-        text-decoration: underline;
-      }
     }
-  }
 
-  .imgWrap {
-    height: 600px;
-    margin-right: 100px;
+    .imgWrap {
+      height: 600px;
+    }
   }
 }
