@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import MainLayout from './components/layout/MainLayout'
 import NotFoundPage from './pages/NotFound'
-import RegisterUserFacePage from './pages/RegisterUserFace'
+import RegisterStudents from './pages/RegisterStudents'
 import SignInPage from './pages/SignIn'
 import SignUpPage from './pages/SignUp'
 import WelcomePage from './pages/WelcomePage'
@@ -15,6 +15,7 @@ const App = () => {
       <Route path="/" element={<WelcomePage />} />
       <Route path="signIn" element={<SignInPage />} />
       <Route path="signUp" element={<SignUpPage />} />
+      <Route path="register" element={<RegisterStudents />} />      
       <Route path="registerUserFace" element={<RegisterUserFacePage />} />
       <Route path="/" element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
