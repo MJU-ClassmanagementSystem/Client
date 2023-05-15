@@ -45,6 +45,7 @@
 
         p {
           margin: 16px;
+          margin-top: 30px;
           font-size: 20px;
           font-weight: 500;
           line-height: 21px;
@@ -52,18 +53,8 @@
       }
 
       .buttonWrap {
+        display: flex;
         margin-top: 57px;
-
-        button {
-          width: 205px;
-          height: 65px;
-          padding: 20px;
-          margin: 20px;
-          font-size: 20px;
-          font-weight: 500;
-          color: color.$WHITE;
-          background-color: color.$PRIMARY;
-        }
       }
 
       .signUp {

@@ -1,4 +1,6 @@
 import classNames from 'classnames/bind'
+import { useNavigate } from 'react-router-dom'
+import LoginButton from 'src/components/features/LoginButton'
 
 import welcomeImg from '../../assets/images/welcome.png'
 import { LogoIcon } from '../../assets/svgs'
@@ -7,6 +9,10 @@ import styles from './welcomePage.module.scss'
 const cx = classNames.bind(styles)
 
 const WelcomePage = () => {
+  const navigate = useNavigate()
+  const handleSignInClick = () => {
+    navigate('/signup')
+  }
   return (
     <>
       <div className={cx('header')}>
@@ -32,10 +38,12 @@ const WelcomePage = () => {
               </p>
             </div>
             <div className={cx('buttonWrap')}>
-              <button>선생님으로 로그인</button>
-              <button>학부모로 로그인</button>
+              <LoginButton text="선생님으로 로그인" url="/manageStudent" />
+              <LoginButton text="학부모로 로그인" url="/manageStudent" />
             </div>
-            <button className={cx('signUp')}>Sign up...</button>
+            <button className={cx('signUp')} onClick={handleSignInClick}>
+              Sign up...
+            </button>
           </div>
         </div>
         <div className={cx('imgWrap')}>
