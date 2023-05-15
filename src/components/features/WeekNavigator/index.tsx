@@ -41,7 +41,7 @@ const WeekNavigator = () => {
       .split('/')
       .slice(0, -1)
       .join('/')
-      .concat('/' + String(Number(week) + 1))
+      .concat('/' + String(Number(week) - 1))
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7))
     navigate(newUrl)
   }
