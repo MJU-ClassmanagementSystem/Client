@@ -4,6 +4,7 @@ import Modal from 'src/components/features/Modal'
 import ManageAttendancePage from 'src/pages/ManageAttendance'
 import ManageClassPage from 'src/pages/ManageClass'
 import ManageStudent from 'src/pages/ManageStudent'
+import RegisterStudents from 'src/pages/RegisterStudents'
 import { modalState } from 'src/recoil/atom'
 
 const MainRoute = () => {
@@ -19,6 +20,7 @@ const MainRoute = () => {
         <Route path="/manageStudent/:studentId/:week" element={<ManageStudent />} />
         <Route path="/manageClass/:week" element={<ManageClassPage />} />
         <Route path="/manageAttendance/:week" element={<ManageAttendancePage />} />
+        <Route path="/registerUserFace" element={<RegisterStudents />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </>

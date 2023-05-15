@@ -15,8 +15,7 @@ const App = () => {
       <Route path="/" element={<WelcomePage />} />
       <Route path="signIn" element={<SignInPage />} />
       <Route path="signUp" element={<SignUpPage />} />
-      <Route path="register" element={<RegisterStudents />} />      
-      <Route path="registerUserFace" element={<RegisterUserFacePage />} />
+      <Route path="register" element={<RegisterStudents />} />
       <Route path="/" element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
           <Route path="*" element={<MainRoute />} />
