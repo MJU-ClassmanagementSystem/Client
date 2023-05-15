@@ -1,0 +1,84 @@
+@use 'src/styles/constants/colors' as color;
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 200px;
+  padding: 50px;
+  font-size: 30px;
+  font-weight: 800;
+
+  h1 {
+    margin-top: 3px;
+    margin-left: 14px;
+
+    .coloredTitle {
+      color: color.$PRIMARY;
+    }
+  }
+}
+
+.pageWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .welcomePage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 2000px;
+    height: 70vh;
+
+    .leftWrap {
+      width: 570px;
+      margin-right: 200px;
+
+      @media (width >= 1000px) {
+        margin-right: 240px;
+      }
+
+      .contentsWrap {
+        .textWrap {
+          margin-top: 100px;
+
+          h2 {
+            margin: 16px;
+            font-size: 70px;
+            font-weight: 500;
+            line-height: 78px;
+
+            .boldText {
+              font-weight: 700;
+            }
+          }
+
+          p {
+            margin: 16px;
+            margin-top: 30px;
+            font-size: 25px;
+            font-weight: 500;
+            line-height: 31px;
+          }
+        }
+
+        .buttonWrap {
+          display: flex;
+          margin-top: 57px;
+        }
+
+        .signUp {
+          margin: 20px;
+          font-size: 18px;
+          font-weight: 600;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .imgWrap {
+      height: 600px;
+    }
+  }
+}
