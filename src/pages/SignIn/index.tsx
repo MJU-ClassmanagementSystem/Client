@@ -25,9 +25,7 @@ const SignInPage = () => {
 
   return (
     <FullScreen className={cx('wrap')}>
-      <div className={cx('imgWrap')}>
-        <p>Class Management System</p>
-      </div>
+      <div className={cx('imgWrap')} />
       <div className={cx('contentWrap')}>
         <form onSubmit={onSubmit}>
           <h1 className={cx('title')}>Sign In</h1>
