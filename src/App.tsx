@@ -1,24 +1,28 @@
 import { Route, Routes } from 'react-router-dom'
 
-import MainPage from './pages/Main'
+import MainLayout from './components/layout/MainLayout'
 import NotFoundPage from './pages/NotFound'
 import RegisterStudents from './pages/RegisterStudents'
 import SignInPage from './pages/SignIn'
 import SignUpPage from './pages/SignUp'
 import WelcomePage from './pages/WelcomePage'
+import MainRoute from './routes/MainRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
 
 const App = () => {
   return (
     <Routes>
-      <Route path="welcome" element={<WelcomePage />} />
+      <Route path="/" element={<WelcomePage />} />
       <Route path="signIn" element={<SignInPage />} />
       <Route path="signUp" element={<SignUpPage />} />
-      <Route path="register" element={<RegisterStudents />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<MainPage />} />
+      <Route path="register" element={<RegisterStudents />} />      
+      <Route path="registerUserFace" element={<RegisterUserFacePage />} />
+      <Route path="/" element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
+          <Route path="*" element={<MainRoute />} />
+        </Route>
       </Route>
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="404" element={<NotFoundPage />} />
     </Routes>
   )
 }

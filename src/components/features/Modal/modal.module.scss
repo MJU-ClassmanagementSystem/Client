@@ -1,0 +1,40 @@
+@use 'src/styles/constants/colors' as color;
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color: color.$BLACK, $alpha: 10%);
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    width: 820px;
+    height: 500px;
+    background-color: #fffae6;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px 0 rgba($color: color.$BLACK, $alpha: 25%);
+
+    .alertMessage {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .button {
+      width: 160px;
+      height: 62px;
+      margin-top: 42px;
+      font-size: 20px;
+      font-weight: 600;
+      background-color: color.$WHITE;
+      border: 1px solid color.$BORDER;
+      border-radius: 10px;
+    }
+  }
+}

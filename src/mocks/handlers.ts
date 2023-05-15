@@ -1,4 +1,13 @@
+import { faker } from '@faker-js/faker'
 import { rest } from 'msw'
+
+import {
+  createAttendanceList,
+  createClassFocusList,
+  createStudentEmotionList,
+  createStudentFocusList,
+  createStudentList,
+} from './faker'
 
 export const handlers = [
   rest.post('/login', async (req, res, ctx) => {
@@ -16,8 +25,7 @@ export const handlers = [
       ctx.delay(100),
       ctx.status(200),
       ctx.json({
-        accessToken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNjY2NjcwNDQ0LCJleHAiOjE2NjY3NTY4NDR9.G2o4ffsAtGeJvRNTT7RPJCSeKoKNcaBKJ4Tm5WuBZWg',
+        accessToken: faker.string.sample(20),
       }),
     )
   }),
@@ -60,11 +68,58 @@ export const handlers = [
     return res(ctx.delay(100), ctx.status(200))
   }),
 
+  rest.get('/student/:week', async (req, res, ctx) => {
+    const { week } = req.params
+
+    if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
+
+    const attendanceList = createAttendanceList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(attendanceList))
+  }),
+
+  rest.get('/class/:week', async (req, res, ctx) => {
+    const { week } = req.params
+
+    if (!Number(week)) return res(ctx.delay(100), ctx.status(400))
+
+    const classFocusList = createClassFocusList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(classFocusList))
+  }),
+
+  rest.get('/student/recess/:studentId/:week', async (req, res, ctx) => {
+    const { week, studentId } = req.params
+
+    if (!Number(week) || !studentId) return res(ctx.delay(100), ctx.status(400))
+
+    const studentEmotionList = createStudentEmotionList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(studentEmotionList))
+  }),
+
+  rest.get('/student/class/:studentId/:week', async (req, res, ctx) => {
+    const { week, studentId } = req.params
+
+    if (!Number(week) || !studentId) return res(ctx.delay(100), ctx.status(400))
+
+    const studentEmotionList = createStudentFocusList()
+
+    if (Number(week) >= 1)
+      return res(ctx.delay(100), ctx.status(200), ctx.json(studentEmotionList))
+  }),
+
+  rest.get('/student', async (_, res, ctx) => {
+    const studentList = createStudentList()
+
+    return res(ctx.delay(100), ctx.status(200), ctx.json(studentList))
+  }),
+
   //TODO: 작성 필요
   // rest.post('/register', null),
-  // rest.get('/class/1', null),
-  // rest.get('/student', null),
   // rest.get('/student/class/1/2', null),
-  // rest.get('/student/break/1/2', null),
   // rest.get('/attendance/', null),
 ]

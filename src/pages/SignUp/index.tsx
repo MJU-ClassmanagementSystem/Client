@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import Dropdown from 'src/components/features/Dropdown'
 import FullScreen from 'src/components/layout/FullScreen'
+import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
 import classManagement from 'src/service/classManagement'
 import { SignupFormData } from 'src/types/reactHookForm'
 
@@ -15,6 +16,7 @@ const cx = classNames.bind(styles)
 const SignUpPage = () => {
   const { register, control, handleSubmit } = useForm<SignupFormData>()
   const [selectedItem, setSelectedItem] = useState('선생님')
+  const throwAsyncError = useThrowAsyncError()
   const navigate = useNavigate()
 
   const isTeacher = selectedItem === '선생님'
@@ -22,19 +24,24 @@ const SignUpPage = () => {
 
   const onSubmit = handleSubmit(async ({ id, name, password, school, studentId }) => {
     if (!id || !password) return
-    switch (selectedItem) {
-      case '선생님':
-        if (!name || !school) return
-        await classManagement.signupTeacher(id, password, name, school)
-        navigate('/signIn')
-        return
-      case '학부모':
-        if (!studentId) return
-        await classManagement.signupParent(id, password, studentId)
-        navigate('/signIn')
-        return
-      default:
-        return
+    try {
+      switch (selectedItem) {
+        case '선생님':
+          if (!name || !school) return
+          await classManagement.signupTeacher(id, password, name, school)
+          navigate('/signIn')
+          return
+        case '학부모':
+          if (!studentId) return
+          await classManagement.signupParent(id, password, studentId)
+          navigate('/signIn')
+          return
+        default:
+          return
+      }
+    } catch (error) {
+      if (error instanceof Error) throwAsyncError(error)
+      console.error(error)
     }
   })
 
