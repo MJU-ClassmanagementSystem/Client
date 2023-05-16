@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useLocation } from 'react-router-dom'
-import { GraduationIcon } from 'src/assets/svgs'
+import { GraduationIcon, LogoIcon } from 'src/assets/svgs'
 import MenuButton from 'src/components/features/MenuButton'
 
 import styles from './sideBar.module.scss'
@@ -15,7 +15,11 @@ const SideBar = ({ schoolName }: SideBarProps) => {
   return (
     <aside className={cx('sidebar')}>
       <div className={cx('header')}>
-        <p>Class Management</p>
+        <LogoIcon className={cx('logo')} />
+        <p className={cx('title')}>
+          <span className={cx('titlePuple')}>MJU </span>
+          classM
+        </p>
       </div>
       <ul>
         <li>

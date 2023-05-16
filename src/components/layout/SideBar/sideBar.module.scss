@@ -11,11 +11,28 @@
   min-height: 500px;
 
   .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding-top: 50px;
     padding-bottom: 58px;
     font-size: 20px;
     text-align: center;
+
+    .logo {
+      width: 30px;
+    }
+
+    .title {
+      margin-left: 10px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .titlePuple {
+      color: color.$PRIMARY;
+    }
   }
 
   & ul {

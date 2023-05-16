@@ -47,9 +47,7 @@ const SignUpPage = () => {
 
   return (
     <FullScreen className={cx('signUp')}>
-      <div className={cx('photo')}>
-        <p>Class Management System</p>
-      </div>
+      <div className={cx('photo')} />
       <div className={cx('formContainer')}>
         <form className={cx('form')} onSubmit={onSubmit}>
           <h1 className={cx('title')}>Sign Up</h1>
