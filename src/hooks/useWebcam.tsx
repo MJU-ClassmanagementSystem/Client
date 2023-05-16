@@ -1,17 +1,15 @@
-import { RefObject, useEffect } from 'react'
+import { RefObject, useEffect, useRef } from 'react'
 
 export const captureFrame = (
   videoRef: RefObject<HTMLVideoElement>,
   canvas: HTMLCanvasElement,
-  isCapturing: boolean,
 ): number | undefined => {
-  console.log(isCapturing)
-  if (!isCapturing || !videoRef.current || !canvas) return
+  if (!videoRef.current || !canvas) return
   const context = canvas.getContext('2d')
   context?.drawImage(videoRef.current, 0, 0)
   const imageData = canvas.toDataURL('image/jpeg')
   console.log(imageData)
-  return requestAnimationFrame(() => captureFrame(videoRef, canvas, isCapturing))
+  return requestAnimationFrame(() => captureFrame(videoRef, canvas))
 }
 
 const startVideo = async (videoRef: RefObject<HTMLVideoElement>) => {
@@ -22,8 +20,12 @@ const startVideo = async (videoRef: RefObject<HTMLVideoElement>) => {
 }
 
 const useWebcam = (videoRef: RefObject<HTMLVideoElement>) => {
+  const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'))
+
   useEffect(() => {
     startVideo(videoRef)
+
+    captureFrame(videoRef, canvasRef.current)
   }, [videoRef])
 }
 
