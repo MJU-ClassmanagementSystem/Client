@@ -1,21 +1,16 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import classNames from 'classnames/bind'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import FullScreen from 'src/components/layout/FullScreen'
-import { startVideo } from 'src/utils/video'
+import useWebcam from 'src/hooks/useWebcam'
 
 import styles from './registerStudents.module.scss'
 
 const cx = classNames.bind(styles)
 
-//const video = document.getElementById('webcam')
-
 const RegisterStudents = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    startVideo(videoRef)
-  }, [])
+  const [isCapturing, setIsCapturing] = useWebcam(videoRef)
 
   return (
     <FullScreen className={cx('registerStudents')}>
@@ -32,8 +27,14 @@ const RegisterStudents = () => {
           </label>
           <input className={cx('input')} id="studentName" type="text" />
 
-          <button className={cx('button')} type="submit">
-            등록
+          <button
+            className={cx('button')}
+            type="button"
+            onClick={() => {
+              setIsCapturing((prev) => !prev)
+            }}
+          >
+            {isCapturing ? '정지' : '등록'}
           </button>
         </div>
       </form>

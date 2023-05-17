@@ -18,7 +18,7 @@ const useWebSocket = () => {
     )
 
     return () => {
-      websocket.close()
+      if (websocket.readyState === websocket.OPEN) websocket.close()
     }
   }, [websocket])
 
