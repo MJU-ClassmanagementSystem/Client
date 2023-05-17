@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { BoardIcon, ClassIcon, StudentIcon } from 'src/assets/svgs'
 import type { MenuButtonType } from 'src/types'
 
@@ -13,8 +13,6 @@ type MenuButtonProps = {
 const cx = classNames.bind(styles)
 
 const MenuButton = ({ isActive, type }: MenuButtonProps) => {
-  const navigate = useNavigate()
-
   const icon = {
     manageClass: <ClassIcon />,
     manageStudent: <StudentIcon />,
@@ -27,15 +25,11 @@ const MenuButton = ({ isActive, type }: MenuButtonProps) => {
     manageAttendance: '출석부 관리',
   }[type]
 
-  const handleClick = () => {
-    navigate(`${type}`)
-  }
-
   return (
-    <button className={cx('button', { isActive: isActive })} onClick={handleClick}>
+    <Link className={cx('button', { isActive: isActive })} to={`${type}`}>
       {icon}
       {text}
-    </button>
+    </Link>
   )
 }
 

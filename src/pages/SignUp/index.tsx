@@ -1,4 +1,3 @@
-import { DevTool } from '@hookform/devtools'
 import classNames from 'classnames/bind'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -14,7 +13,7 @@ import styles from './signUp.module.scss'
 const cx = classNames.bind(styles)
 
 const SignUpPage = () => {
-  const { register, control, handleSubmit } = useForm<SignupFormData>()
+  const { register, handleSubmit } = useForm<SignupFormData>()
   const [selectedItem, setSelectedItem] = useState('선생님')
   const throwAsyncError = useThrowAsyncError()
   const navigate = useNavigate()
@@ -126,7 +125,6 @@ const SignUpPage = () => {
           </button>
         </form>
       </div>
-      <DevTool control={control} />
     </FullScreen>
   )
 }

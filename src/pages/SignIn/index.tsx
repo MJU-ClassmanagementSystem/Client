@@ -1,4 +1,3 @@
-import { DevTool } from '@hookform/devtools'
 import classNames from 'classnames/bind'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
@@ -13,7 +12,7 @@ import styles from './signIn.module.scss'
 const cx = classNames.bind(styles)
 
 const SignInPage = () => {
-  const { register, control, handleSubmit } = useForm<SignInFormData>()
+  const { register, handleSubmit } = useForm<SignInFormData>()
   const [, setAuth] = useRecoilState(authState)
   const navigate = useNavigate()
 
@@ -44,7 +43,7 @@ const SignInPage = () => {
           </div>
           <div className={cx('inpWrap')}>
             <label htmlFor="password" className={cx('label')}>
-              Passwrod
+              Password
             </label>
             <input
               id="password"
@@ -53,10 +52,11 @@ const SignInPage = () => {
               placeholder="비밀번호를 입력해주세요"
             />
           </div>
-          <button className={cx('submitBtn')}>Sign In</button>
+          <button type="submit" className={cx('submitBtn')}>
+            Sign In
+          </button>
         </form>
       </div>
-      <DevTool control={control} />
     </FullScreen>
   )
 }

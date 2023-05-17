@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind'
+import { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoginIcon } from 'src/assets/svgs'
 
@@ -14,18 +15,13 @@ interface LoginButtonProps {
 const LoginButton = ({ text, url }: LoginButtonProps) => {
   const navigate = useNavigate()
 
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     navigate(url)
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      navigate(url)
-    }
-  }
-
   return (
-    <button className={cx('button')} onClick={handleClick} onKeyDown={handleKeyDown}>
+    <button type="submit" className={cx('button')} onClick={handleClick}>
       <span>{text}</span>
       <LoginIcon className={cx('icon')} />
     </button>
