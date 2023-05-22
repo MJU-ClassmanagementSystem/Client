@@ -13,11 +13,20 @@
     color: color.$PRIMARY;
   }
 
-  .camera {
-    width: 900px;
-    aspect-ratio: 4/3;
-    background-color: gray;
-    transform: scale(-1, 1);
+  .videoWrapper {
+    position: relative;
+
+    .video {
+      width: 900px;
+      aspect-ratio: 4/3;
+      background-color: gray;
+    }
+
+    .canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 
   .form {

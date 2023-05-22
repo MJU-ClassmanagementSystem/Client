@@ -19,16 +19,11 @@ export const captureFrame = (
 }
 
 // 브라우저에 비디오 화면을 그리는 함수
-export const startVideo = async (
-  videoRef: RefObject<HTMLVideoElement>,
-  canvasRef: RefObject<HTMLCanvasElement>,
-) => {
+export const startVideo = async (videoRef: RefObject<HTMLVideoElement>) => {
   const stream = await navigator.mediaDevices.getUserMedia({ video: true })
   if (!videoRef || !videoRef.current || videoRef.current.srcObject) return
   videoRef.current.srcObject = stream
   videoRef.current.play()
-
-  setCanvas(videoRef, canvasRef)
 }
 
 // 비디오의 크기에 따른 Canvas의 크기를 설정하는 함수

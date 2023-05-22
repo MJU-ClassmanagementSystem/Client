@@ -16,3 +16,18 @@ export const modalState = atom({
     name: '',
   },
 })
+
+export interface Scan {
+  isScanning: boolean
+  studentId: string
+  name: string
+}
+
+export const scanState = atom<Scan>({
+  key: 'scan',
+  default: {
+    isScanning: false,
+    studentId: '',
+    name: '',
+  },
+})
