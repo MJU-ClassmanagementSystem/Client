@@ -35,7 +35,7 @@ const useDetectFace = (
       const { data } = await axios.get<Response>('http://localhost:3300/api/get-images')
 
       const labeledFaceDescriptors = await getLabeldFaceDescriptors(data)
-      const faceMatcher = new FaceMatcher(labeledFaceDescriptors, 0.7)
+      const faceMatcher = new FaceMatcher(labeledFaceDescriptors, 0.9)
 
       if (!canvasRef.current || !videoRef.current) return
       matchDimensions(canvasRef.current, {
@@ -47,6 +47,8 @@ const useDetectFace = (
         if (!videoRef.current || !canvasRef.current) return
         const detections = await detectAllFaces(videoRef.current)
           .withFaceLandmarks()
+          .withFaceExpressions()
+          .withAgeAndGender()
           .withFaceDescriptors()
 
         const resizedDetections = resizeResults(detections, {
@@ -64,14 +66,17 @@ const useDetectFace = (
 
         results.forEach((result, i) => {
           const { box } = resizedDetections[i].detection
+
           const drawBox = new draw.DrawBox(box, {
             label: result.label,
           })
+
           if (canvasRef.current) {
             drawBox.draw(canvasRef.current)
+            draw.drawFaceExpressions(canvasRef.current, resizedDetections[i])
           }
         })
-      }, 1)
+      }, 100)
     })()
   }, [canvasRef, videoRef])
 }
