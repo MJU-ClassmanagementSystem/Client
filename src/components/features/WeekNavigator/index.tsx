@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { ArrowLeftIcon, ArrowRightIcon } from 'src/assets/svgs'
 import { getWeekNumber } from 'src/utils/week'
 
@@ -11,8 +11,8 @@ const cx = classNames.bind(styles)
 const todayDate = new Date()
 
 const WeekNavigator = () => {
-  const navigate = useNavigate()
-  const { week } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams('week=1&studentId=1')
+  const week = searchParams.get('week')
   const [date, setDate] = useState<Date>(
     new Date(
       todayDate.getFullYear(),
@@ -20,30 +20,29 @@ const WeekNavigator = () => {
       todayDate.getDate() - (Number(week) - 1) * 7,
     ),
   )
-  const { pathname } = useLocation()
   const { formattedString } = getWeekNumber(date)
 
   const handleToPrevWeek = () => {
     if (!week) return
-    const newUrl = pathname
-      .split('/')
-      .slice(0, -1)
-      .join('/')
-      .concat('/' + String(Number(week) + 1))
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7))
-    navigate(newUrl)
+    setSearchParams((searchParams) => {
+      console.log(searchParams)
+      const prevWeek = Number(searchParams.get('week')) + 1
+      console.log('prevWeek', prevWeek)
+      searchParams.set('week', prevWeek.toString())
+      return searchParams
+    })
   }
 
   const handleToNextWeek = () => {
     if (!week) return
     if (Number(week) <= 1) return
-    const newUrl = pathname
-      .split('/')
-      .slice(0, -1)
-      .join('/')
-      .concat('/' + String(Number(week) - 1))
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7))
-    navigate(newUrl)
+    setSearchParams((searchParams) => {
+      const nextWeek = Number(searchParams.get('week')) - 1
+      searchParams.set('week', nextWeek.toString())
+      return searchParams
+    })
   }
 
   return (

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import Chart from 'src/components/features/Chart'
 import EmotionChart from 'src/components/features/EmotionChart'
 import StudentList from 'src/components/features/StudentList'
@@ -15,12 +15,14 @@ import styles from './manageStudent.module.scss'
 const cx = classNames.bind(styles)
 
 const ManageStudentPage = () => {
-  const { week, studentId } = useParams()
   const asyncError = useThrowAsyncError()
+  const [searchParams] = useSearchParams()
   const [emotionData, setEmotionData] = useState<EmotionData[]>()
   const [chartData, setChartData] = useState<ChartData[]>()
   const [studentsData, setStudentsData] = useState<Student[]>()
   const [visibleChart, setVisibleChart] = useState<'chart' | 'emotion'>('chart')
+  const week = searchParams.get('week')
+  const studentId = searchParams.get('week')
 
   const fetchStudentEmotionList = useCallback(
     async (selectedWeek: string, selectedStudent: string) => {

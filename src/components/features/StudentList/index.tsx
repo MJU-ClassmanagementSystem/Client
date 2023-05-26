@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
 import type { Student } from 'src/types'
 
 import styles from './student.module.scss'
@@ -11,14 +11,13 @@ interface StdentListProps {
 const cx = classNames.bind(styles)
 
 const StudentList = ({ students }: StdentListProps) => {
-  const navigate = useNavigate()
-  const { studentId, week } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [toggleTop, setToggleTop] = useState(0)
   const listRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const studentId = searchParams.get('studentId')
 
   useEffect(() => {
     const index = students.findIndex((student) => student.id === studentId)
-    console.log('index', index)
     if (index !== -1 && listRefs.current[index] && listRefs.current[index] !== null) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setToggleTop(listRefs.current[index]!.offsetTop)
@@ -26,7 +25,10 @@ const StudentList = ({ students }: StdentListProps) => {
   }, [studentId, students])
 
   const handleClick = (id: string) => {
-    navigate(`/manageStudent/${id}/${week}`)
+    setSearchParams((searchParams) => {
+      searchParams.set('studentId', id)
+      return searchParams
+    })
   }
 
   return (
