@@ -51,6 +51,13 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    min-width: 1400px;
     padding: 0 35px 35px;
+
+    .selector {
+      position: fixed;
+      top: 440px;
+      left: 250px;
+    }
   }
 }
