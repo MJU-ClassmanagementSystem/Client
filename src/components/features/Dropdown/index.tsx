@@ -30,7 +30,6 @@ const Dropdown = ({ itemList, title, value, onClick }: DropdownProps) => {
     e.preventDefault()
     onClick(e.currentTarget.innerText)
     setIsOpen(false)
-    console.log(isOpen)
   }
   useOnClickOutside(listRef, handleClose)
 

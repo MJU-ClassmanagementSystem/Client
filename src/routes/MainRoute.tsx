@@ -14,11 +14,9 @@ const MainRoute = () => {
     <>
       {isOpened && <Modal name={name} />}
       <Routes>
-        <Route path="/manageAttendance" element={<Navigate to="/manageAttendance/1" />} />
-        <Route path="/manageClass" element={<Navigate to="/manageClass/1" />} />
         <Route path="/manageStudent" element={<ManageStudent />} />
-        <Route path="/manageClass/:week" element={<ManageClassPage />} />
-        <Route path="/manageAttendance/:week" element={<ManageAttendancePage />} />
+        <Route path="/manageClass" element={<ManageClassPage />} />
+        <Route path="/manageAttendance" element={<ManageAttendancePage />} />
         <Route path="/registerUserFace" element={<RegisterStudents />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

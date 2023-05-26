@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import AttendanceTable from 'src/components/features/AttendanceTable'
 import Button from 'src/components/features/Button'
 import FullScreen from 'src/components/layout/FullScreen'
@@ -14,9 +14,10 @@ import styles from './manageAttendance.module.scss'
 const cx = classNames.bind(styles)
 
 const ManageAttendancePage = () => {
-  const { week } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const asyncError = useThrowAsyncError()
   const [data, setData] = useState<GetAttendanceResponse>()
+  const week = searchParams.get('week')
 
   const fetchAttendance = useCallback(
     async (selectedWeek: string) => {
@@ -34,6 +35,11 @@ const ManageAttendancePage = () => {
   useEffect(() => {
     fetchAttendance(week || '1')
   }, [fetchAttendance, week])
+
+  useEffect(() => {
+    if (week) return
+    setSearchParams('week=1')
+  }, [setSearchParams, week])
 
   return (
     <FullScreen className={cx('manageAttendancePage')}>

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import Chart from 'src/components/features/Chart'
 import EmotionChart from 'src/components/features/EmotionChart'
 import StudentList from 'src/components/features/StudentList'
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles)
 
 const ManageStudentPage = () => {
   const asyncError = useThrowAsyncError()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [emotionData, setEmotionData] = useState<EmotionData[]>()
   const [chartData, setChartData] = useState<ChartData[]>()
   const [studentsData, setStudentsData] = useState<Student[]>()
@@ -77,6 +77,11 @@ const ManageStudentPage = () => {
   useEffect(() => {
     fetchStudentList()
   }, [fetchStudentList])
+
+  useEffect(() => {
+    if (week || studentId) return
+    setSearchParams('week=1&studentId=1')
+  }, [setSearchParams, studentId, week])
 
   let chart
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
@@ -15,9 +15,10 @@ const cx = classNames.bind(styles)
 const chartCategories = ['월', '화', '수', '목', '금']
 
 const ManageClassPage = () => {
-  const { week } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const asyncError = useThrowAsyncError()
   const [data, setData] = useState<ChartData[]>()
+  const week = searchParams.get('week')
 
   const fetchClassFocusList = useCallback(
     async (selectedWeek: string) => {
@@ -35,6 +36,11 @@ const ManageClassPage = () => {
   useEffect(() => {
     fetchClassFocusList(week || '1')
   }, [fetchClassFocusList, week])
+
+  useEffect(() => {
+    if (week) return
+    setSearchParams('week=1')
+  }, [setSearchParams, week])
 
   return (
     <FullScreen className={cx('manageClassPage')}>

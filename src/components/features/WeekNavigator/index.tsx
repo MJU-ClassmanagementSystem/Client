@@ -11,7 +11,7 @@ const cx = classNames.bind(styles)
 const todayDate = new Date()
 
 const WeekNavigator = () => {
-  const [searchParams, setSearchParams] = useSearchParams('week=1&studentId=1')
+  const [searchParams, setSearchParams] = useSearchParams()
   const week = searchParams.get('week')
   const [date, setDate] = useState<Date>(
     new Date(
@@ -26,9 +26,7 @@ const WeekNavigator = () => {
     if (!week) return
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7))
     setSearchParams((searchParams) => {
-      console.log(searchParams)
       const prevWeek = Number(searchParams.get('week')) + 1
-      console.log('prevWeek', prevWeek)
       searchParams.set('week', prevWeek.toString())
       return searchParams
     })
