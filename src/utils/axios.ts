@@ -12,7 +12,6 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
   const storedValue = localStorage.getItem('recoil-persist')
   const { auth } = JSON.parse(storedValue || '')
-  console.log(auth)
   config.headers.Authorization = `Bearer ${auth}`
 
   return config

@@ -97,7 +97,7 @@ export default {
   getAttendance(week: string): AxiosPromise<GetAttendanceResponse> {
     return Axios({
       method: 'get',
-      url: `/student/${week}`,
+      url: `/student/attendance/${week}`,
     })
   },
 

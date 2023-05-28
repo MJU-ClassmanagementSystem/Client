@@ -8,10 +8,12 @@ export interface LoginResponse {
   }
 }
 
+export type AttendanceData = { id: string; name: string; attend: string[] }[]
+
 export interface GetAttendanceResponse {
   status: number
   message: string
-  data: { id: string; name: string; attend: string[] }[]
+  data: AttendanceData
 }
 export interface GetClassFocusListResponse {
   status: number

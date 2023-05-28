@@ -7,7 +7,7 @@ import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
 import classManagement from 'src/service/classManagement'
-import type { GetAttendanceResponse } from 'src/types/axios'
+import type { AttendanceData } from 'src/types/axios'
 
 import styles from './manageAttendance.module.scss'
 
@@ -16,14 +16,14 @@ const cx = classNames.bind(styles)
 const ManageAttendancePage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const asyncError = useThrowAsyncError()
-  const [data, setData] = useState<GetAttendanceResponse>()
+  const [data, setData] = useState<AttendanceData>()
   const week = searchParams.get('week')
 
   const fetchAttendance = useCallback(
     async (selectedWeek: string) => {
       try {
         const { data } = await classManagement.getAttendance(selectedWeek)
-        setData(data)
+        setData(data.data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
         console.error(error)

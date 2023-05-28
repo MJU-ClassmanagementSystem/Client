@@ -1,21 +1,21 @@
 import classNames from 'classnames/bind'
 import { Status } from 'src/types'
-import { GetAttendanceResponse } from 'src/types/axios'
+import { AttendanceData } from 'src/types/axios'
 
 import styles from './attendanceTable.module.scss'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 
 type AttendanceTableProps = {
-  data: GetAttendanceResponse
+  data: AttendanceData
 }
 
 const cx = classNames.bind(styles)
 
-const convertedType: { [key: number]: Status } = {
-  0: 'present',
-  1: 'absent',
-  2: 'inadequate',
+const convertedType: { [key: string]: Status } = {
+  '0': 'present',
+  '1': 'absent',
+  '2': 'inadequate',
 }
 
 const AttendanceTable = ({ data }: AttendanceTableProps) => {
