@@ -19,7 +19,7 @@ const SignInPage = () => {
 
   const onSubmit = handleSubmit(async ({ id, password }) => {
     const { data } = await classManagement.login(id, password)
-    setAuth(data.accessToken)
+    setAuth(data.data.accessToken)
     navigate('/manageClass')
   })
 

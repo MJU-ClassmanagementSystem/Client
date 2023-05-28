@@ -24,7 +24,7 @@ const ManageClassPage = () => {
     async (selectedWeek: string) => {
       try {
         const { data } = await classManagement.getClassFocusList(selectedWeek)
-        setData(data)
+        setData(data.data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
         console.error(error)

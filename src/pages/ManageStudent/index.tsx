@@ -31,7 +31,7 @@ const ManageStudentPage = () => {
           selectedWeek,
           selectedStudent,
         )
-        setEmotionData(data)
+        setEmotionData(data.data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
         console.error(error)
@@ -47,7 +47,7 @@ const ManageStudentPage = () => {
           selectedWeek,
           selectedStudent,
         )
-        setChartData(data)
+        setChartData(data.data)
       } catch (error) {
         if (error instanceof Error) asyncError(error)
         console.error(error)
@@ -59,7 +59,7 @@ const ManageStudentPage = () => {
   const fetchStudentList = useCallback(async () => {
     try {
       const { data } = await classManagement.getStudentList()
-      setStudentsData(data)
+      setStudentsData(data.data)
     } catch (error) {
       if (error instanceof Error) asyncError(error)
       console.error(error)
