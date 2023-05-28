@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'

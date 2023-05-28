@@ -22,7 +22,7 @@ const ManageStudentPage = () => {
   const [studentsData, setStudentsData] = useState<Student[]>()
   const [visibleChart, setVisibleChart] = useState<'chart' | 'emotion'>('chart')
   const week = searchParams.get('week')
-  const studentId = searchParams.get('week')
+  const studentId = searchParams.get('studentId')
 
   const fetchStudentEmotionList = useCallback(
     async (selectedWeek: string, selectedStudent: string) => {
