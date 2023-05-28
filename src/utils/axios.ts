@@ -4,9 +4,7 @@ const instance = axios.create({
   baseURL: 'http://54.180.40.227:8080',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://127.0.0.1:5174',
   },
-  // withCredentials: true,
 
   timeout: 4000,
 })
