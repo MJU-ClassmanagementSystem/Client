@@ -27,7 +27,15 @@ const SignInPage = () => {
 
     setAuth(token)
     setUserType(type)
-    navigate('/manageClass')
+
+    switch (type) {
+      case 'parent':
+        navigate('/manageStudent')
+        return
+      case 'teacher':
+        navigate('/manageClass')
+        return
+    }
   })
 
   return (

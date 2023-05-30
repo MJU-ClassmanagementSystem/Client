@@ -1,7 +1,9 @@
 import classNames from 'classnames/bind'
 import { useLocation } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
 import { GraduationIcon, LogoIcon } from 'src/assets/svgs'
 import MenuButton from 'src/components/features/MenuButton'
+import { userTypeState } from 'src/recoil/atom'
 
 import styles from './sideBar.module.scss'
 
@@ -11,6 +13,9 @@ type SideBarProps = { schoolName: string }
 
 const SideBar = ({ schoolName }: SideBarProps) => {
   const { pathname } = useLocation()
+  const userType = useRecoilValue(userTypeState)
+
+  const isTeacher = userType === 'teacher'
 
   return (
     <aside className={cx('sidebar')}>
@@ -22,12 +27,14 @@ const SideBar = ({ schoolName }: SideBarProps) => {
         </p>
       </div>
       <ul>
-        <li>
-          <MenuButton
-            type="manageClass"
-            isActive={/\/manageClass(?:\/\d+)?/.test(pathname)}
-          />
-        </li>
+        {isTeacher && (
+          <li>
+            <MenuButton
+              type="manageClass"
+              isActive={/\/manageClass(?:\/\d+)?/.test(pathname)}
+            />
+          </li>
+        )}
         <li>
           <MenuButton
             type="manageStudent"

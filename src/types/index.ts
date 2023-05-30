@@ -26,6 +26,8 @@ export interface Student {
 
 export interface Token {
   sub: string
-  type: string
+  type: UserType
   exp: number
 }
+
+export type UserType = 'parent' | 'teacher'

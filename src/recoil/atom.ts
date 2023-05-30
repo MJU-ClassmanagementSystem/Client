@@ -1,5 +1,6 @@
 import { atom } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
+import { UserType } from 'src/types'
 
 const { persistAtom } = recoilPersist()
 
@@ -17,8 +18,8 @@ export const modalState = atom({
   },
 })
 
-export const userTypeState = atom({
+export const userTypeState = atom<UserType>({
   key: 'type',
-  default: '',
+  default: 'teacher',
   effects_UNSTABLE: [persistAtom],
 })
