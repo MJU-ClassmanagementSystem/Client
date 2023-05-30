@@ -1,11 +1,13 @@
 import classNames from 'classnames/bind'
 import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
 import AttendanceTable from 'src/components/features/AttendanceTable'
 import Button from 'src/components/features/Button'
 import FullScreen from 'src/components/layout/FullScreen'
 import Header from 'src/components/layout/Header'
 import useThrowAsyncError from 'src/hooks/useThrowAsyncError'
+import { userTypeState } from 'src/recoil/atom'
 import classManagement from 'src/service/classManagement'
 import type { AttendanceData } from 'src/types/axios'
 
@@ -18,6 +20,9 @@ const ManageAttendancePage = () => {
   const asyncError = useThrowAsyncError()
   const [data, setData] = useState<AttendanceData>()
   const week = searchParams.get('week')
+  const userType = useRecoilValue(userTypeState)
+
+  const isTeacher = userType === 'teacher'
 
   const fetchAttendance = useCallback(
     async (selectedWeek: string) => {
@@ -45,10 +50,12 @@ const ManageAttendancePage = () => {
     <FullScreen className={cx('manageAttendancePage')}>
       <Header menuTitle="출석부" />
       <main className={cx('main')}>
-        <div className={cx('buttonContainer')}>
-          <Button>학생 추가</Button>
-          <Button>학생 삭제</Button>
-        </div>
+        {isTeacher && (
+          <div className={cx('buttonContainer')}>
+            <Button>학생 추가</Button>
+            <Button>학생 삭제</Button>
+          </div>
+        )}
         {data && <AttendanceTable data={data} />}
       </main>
     </FullScreen>
