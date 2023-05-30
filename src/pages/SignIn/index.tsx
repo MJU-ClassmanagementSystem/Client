@@ -1,11 +1,13 @@
 import { DevTool } from '@hookform/devtools'
 import classNames from 'classnames/bind'
+import jwtDecode from 'jwt-decode'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import FullScreen from 'src/components/layout/FullScreen'
-import { authState } from 'src/recoil/atom'
+import { authState, userTypeState } from 'src/recoil/atom'
 import classManagement from 'src/service/classManagement'
+import { Token } from 'src/types'
 import { SignInFormData } from 'src/types/reactHookForm'
 
 import styles from './signIn.module.scss'
@@ -14,12 +16,17 @@ const cx = classNames.bind(styles)
 
 const SignInPage = () => {
   const { register, control, handleSubmit } = useForm<SignInFormData>()
-  const [, setAuth] = useRecoilState(authState)
+  const setAuth = useSetRecoilState(authState)
+  const setUserType = useSetRecoilState(userTypeState)
   const navigate = useNavigate()
 
   const onSubmit = handleSubmit(async ({ id, password }) => {
     const { data } = await classManagement.login(id, password)
-    setAuth(data.data.accessToken)
+    const token = data.data.accessToken
+    const { type } = jwtDecode<Token>(token)
+
+    setAuth(token)
+    setUserType(type)
     navigate('/manageClass')
   })
 

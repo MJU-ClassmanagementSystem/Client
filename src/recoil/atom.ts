@@ -16,3 +16,9 @@ export const modalState = atom({
     name: '',
   },
 })
+
+export const userTypeState = atom({
+  key: 'type',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+})

@@ -23,3 +23,9 @@ export interface Student {
   teacherId: string
   parentId: string
 }
+
+export interface Token {
+  sub: string
+  type: string
+  exp: number
+}
