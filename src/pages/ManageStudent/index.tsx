@@ -67,11 +67,11 @@ const ManageStudentPage = () => {
   }, [asyncError])
 
   useEffect(() => {
-    fetchStudentEmotionList(week || '1', studentId || '1')
+    fetchStudentEmotionList(week || '0', studentId || '0')
   }, [fetchStudentEmotionList, studentId, week])
 
   useEffect(() => {
-    fetchClassFocusList(week || '1', studentId || '1')
+    fetchClassFocusList(week || '0', studentId || '0')
   }, [fetchClassFocusList, studentId, week])
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const ManageStudentPage = () => {
 
   useEffect(() => {
     if (week || studentId) return
-    setSearchParams('week=1&studentId=1')
+    setSearchParams('week=0&studentId=1')
   }, [setSearchParams, studentId, week])
 
   let chart

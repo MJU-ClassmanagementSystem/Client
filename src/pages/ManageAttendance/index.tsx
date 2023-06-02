@@ -38,12 +38,12 @@ const ManageAttendancePage = () => {
   )
 
   useEffect(() => {
-    fetchAttendance(week || '1')
+    fetchAttendance(week || '0')
   }, [fetchAttendance, week])
 
   useEffect(() => {
     if (week) return
-    setSearchParams('week=1')
+    setSearchParams('week=0')
   }, [setSearchParams, week])
 
   return (

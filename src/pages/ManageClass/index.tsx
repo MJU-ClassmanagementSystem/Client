@@ -34,12 +34,12 @@ const ManageClassPage = () => {
   )
 
   useEffect(() => {
-    fetchClassFocusList(week || '1')
+    fetchClassFocusList(week || '0')
   }, [fetchClassFocusList, week])
 
   useEffect(() => {
     if (week) return
-    setSearchParams('week=1')
+    setSearchParams('week=0')
   }, [setSearchParams, week])
 
   return (
