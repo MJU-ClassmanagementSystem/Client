@@ -16,6 +16,7 @@ const TableData = ({ status }: TableDataProps) => {
       present: 'O',
       absent: 'X',
       inadequate: '△',
+      future: '',
     }[status]
 
   return (
