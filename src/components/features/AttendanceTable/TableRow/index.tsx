@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react'
 import { Status } from 'src/types'
 
 import RowTitle from '../RowTitle'
@@ -11,12 +12,24 @@ type TableRow = {
   thur?: Status
   fri?: Status
   studentId?: string
+  onClickTitle?: (e?: MouseEvent<HTMLButtonElement>) => void
 }
 
-const TableRow = ({ dataTitle, mon, tue, wed, thur, fri, studentId }: TableRow) => {
+const TableRow = ({
+  dataTitle,
+  mon,
+  tue,
+  wed,
+  thur,
+  fri,
+  onClickTitle,
+  studentId,
+}: TableRow) => {
   return (
     <tr>
-      <RowTitle studentId={studentId}>{dataTitle}</RowTitle>
+      <RowTitle onClick={onClickTitle} studentId={studentId}>
+        {dataTitle}
+      </RowTitle>
       <TableData status={mon} />
       <TableData status={tue} />
       <TableData status={wed} />

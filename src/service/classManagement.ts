@@ -155,4 +155,18 @@ export default {
       url: '/student',
     })
   },
+
+  /**
+   * 학생을 삭제하는 api
+   * @returns
+   */
+  deleteStudent(studentId: string): AxiosPromise<GetStudentListResponse> {
+    return Axios({
+      method: 'delete',
+      url: '/student',
+      data: {
+        id: studentId,
+      },
+    })
+  },
 }

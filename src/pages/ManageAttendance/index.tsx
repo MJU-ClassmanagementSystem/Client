@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
-import { useCallback, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { MouseEvent, useCallback, useEffect, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import AttendanceTable from 'src/components/features/AttendanceTable'
 import Button from 'src/components/features/Button'
@@ -18,6 +18,7 @@ const cx = classNames.bind(styles)
 const ManageAttendancePage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const asyncError = useThrowAsyncError()
+  const navigate = useNavigate()
   const [data, setData] = useState<AttendanceData>()
   const week = searchParams.get('week')
   const userType = useRecoilValue(userTypeState)
@@ -36,6 +37,26 @@ const ManageAttendancePage = () => {
     },
     [asyncError],
   )
+
+  const deleteStudent = useCallback(
+    async (studentId: string) => {
+      try {
+        await classManagement.deleteStudent(studentId)
+      } catch (error) {
+        if (error instanceof Error) asyncError(error)
+        console.error(error)
+      }
+    },
+    [asyncError],
+  )
+
+  const handleDeleteStudent = (e?: MouseEvent<HTMLButtonElement>) => {
+    if (!e) return
+    const { studentid } = e.currentTarget.dataset
+    if (!studentid) throw new Error('해당하는 학번이 존재하지 않습니다')
+    deleteStudent(studentid)
+    navigate(0)
+  }
 
   useEffect(() => {
     fetchAttendance(week || '0')
@@ -56,7 +77,7 @@ const ManageAttendancePage = () => {
             <Button>학생 삭제</Button>
           </div>
         )}
-        {data && <AttendanceTable data={data} />}
+        {data && <AttendanceTable data={data} onClickTitle={handleDeleteStudent} />}
       </main>
     </FullScreen>
   )

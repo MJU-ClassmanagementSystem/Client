@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind'
+import { MouseEvent } from 'react'
 import { Status } from 'src/types'
 import { AttendanceData } from 'src/types/axios'
 
@@ -8,6 +9,7 @@ import TableRow from './TableRow'
 
 type AttendanceTableProps = {
   data: AttendanceData
+  onClickTitle?: (e?: MouseEvent<HTMLButtonElement>) => void
 }
 
 const cx = classNames.bind(styles)
@@ -19,7 +21,7 @@ const convertedType: { [key: string]: Status } = {
   '3': 'future',
 }
 
-const AttendanceTable = ({ data }: AttendanceTableProps) => {
+const AttendanceTable = ({ data, onClickTitle }: AttendanceTableProps) => {
   return (
     <table className={cx('table')}>
       <TableHeader />
@@ -34,6 +36,7 @@ const AttendanceTable = ({ data }: AttendanceTableProps) => {
             wed={convertedType[item.attend[2]]}
             thur={convertedType[item.attend[3]]}
             fri={convertedType[item.attend[4]]}
+            onClickTitle={onClickTitle}
           />
         ))}
       </tbody>
