@@ -4,7 +4,7 @@ export type Subject = '국어' | '수학' | '영어' | '과학'
 
 export type Attendance = '0' | '1' | '2'
 
-export type Status = 'present' | 'absent' | 'inadequate'
+export type Status = 'present' | 'absent' | 'inadequate' | 'future'
 
 export interface ChartData {
   subjectName: string

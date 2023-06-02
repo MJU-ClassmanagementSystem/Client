@@ -67,11 +67,11 @@ const ManageStudentPage = () => {
   }, [asyncError])
 
   useEffect(() => {
-    fetchStudentEmotionList(week || '0', studentId || '0')
+    fetchStudentEmotionList(week || '0', studentId || '1')
   }, [fetchStudentEmotionList, studentId, week])
 
   useEffect(() => {
-    fetchClassFocusList(week || '0', studentId || '0')
+    fetchClassFocusList(week || '0', studentId || '1')
   }, [fetchClassFocusList, studentId, week])
 
   useEffect(() => {

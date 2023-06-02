@@ -16,6 +16,7 @@ const convertedType: { [key: string]: Status } = {
   '0': 'present',
   '1': 'absent',
   '2': 'inadequate',
+  '3': 'future',
 }
 
 const AttendanceTable = ({ data }: AttendanceTableProps) => {

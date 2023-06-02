@@ -1,4 +1,4 @@
-import type { ChartData, EmotionData, Student } from '.'
+import type { Attendance, ChartData, EmotionData, Student } from '.'
 
 export interface LoginResponse {
   status: number
@@ -8,7 +8,7 @@ export interface LoginResponse {
   }
 }
 
-export type AttendanceData = { id: string; name: string; attend: string[] }[]
+export type AttendanceData = { id: string; name: string; attend: Attendance[] }[]
 
 export interface GetAttendanceResponse {
   status: number
