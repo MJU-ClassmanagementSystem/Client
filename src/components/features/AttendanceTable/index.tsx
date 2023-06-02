@@ -27,6 +27,7 @@ const AttendanceTable = ({ data }: AttendanceTableProps) => {
         {data.map((item, key) => (
           <TableRow
             key={`${item.name}-${key + 1}`}
+            studentId={item.id}
             dataTitle={item.name}
             mon={convertedType[item.attend[0]]}
             tue={convertedType[item.attend[1]]}

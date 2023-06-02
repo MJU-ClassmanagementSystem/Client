@@ -10,12 +10,13 @@ type TableRow = {
   wed?: Status
   thur?: Status
   fri?: Status
+  studentId?: string
 }
 
-const TableRow = ({ dataTitle, mon, tue, wed, thur, fri }: TableRow) => {
+const TableRow = ({ dataTitle, mon, tue, wed, thur, fri, studentId }: TableRow) => {
   return (
     <tr>
-      <RowTitle>{dataTitle}</RowTitle>
+      <RowTitle studentId={studentId}>{dataTitle}</RowTitle>
       <TableData status={mon} />
       <TableData status={tue} />
       <TableData status={wed} />

@@ -6,10 +6,15 @@ const cx = classNames.bind(styles)
 
 type RowTitleProps = {
   children: string
+  studentId?: string
 }
 
-const RowTitle = ({ children }: RowTitleProps) => {
-  return <th className={cx('rowTitle')}>{children}</th>
+const RowTitle = ({ children, studentId }: RowTitleProps) => {
+  return (
+    <th data-studentId={studentId} className={cx('rowTitle')}>
+      {children}
+    </th>
+  )
 }
 
 export default RowTitle
