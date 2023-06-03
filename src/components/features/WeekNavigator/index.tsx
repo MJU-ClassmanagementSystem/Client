@@ -34,7 +34,7 @@ const WeekNavigator = () => {
 
   const handleToNextWeek = () => {
     if (!week) return
-    if (Number(week) <= 1) return
+    if (Number(week) <= 0) return
     setDate((date) => new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7))
     setSearchParams((searchParams) => {
       const nextWeek = Number(searchParams.get('week')) - 1

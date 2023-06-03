@@ -34,6 +34,7 @@ const Chart: React.FC<ChartProps> = ({
       },
       yaxis: {
         max: 100,
+        decimalsInFloat: 0,
       },
       dataLabels: {
         enabled: false,
