@@ -9,7 +9,7 @@ type EmotionData = {
 interface EmotionChartProps {
   data: EmotionData[]
 }
-const SERIESNAME = ['파랑', '초록', '노랑', '빨강', '보라']
+const SERIESNAME = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
 const OPTIONS: ApexOptions = {
   chart: {
