@@ -8,7 +8,7 @@ import { RecoilRoot } from 'recoil'
 
 import App from './App.tsx'
 import ErrorBoundary from './components/shared/ErrorBoundary.tsx'
-import { worker } from './mocks/browsers.ts'
+// import { worker } from './mocks/browsers.ts'
 
 // if (process.env.NODE_ENV === 'development') worker.start()
 
