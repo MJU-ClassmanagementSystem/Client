@@ -50,11 +50,11 @@ const Chart: React.FC<ChartProps> = ({
     series: [
       {
         name: 'Focus Rate',
-        data: item.focusRate.map((value) => (isNaN(value) ? 0 : value)),
+        data: item.focusRate?.map((value) => (isNaN(value) ? 0 : value)),
       },
       {
         name: 'Interest Rate',
-        data: item.interestRate.map((value) => (isNaN(value) ? 0 : value)),
+        data: item.interestRate?.map((value) => (isNaN(value) ? 0 : value)),
       },
     ],
   }))
