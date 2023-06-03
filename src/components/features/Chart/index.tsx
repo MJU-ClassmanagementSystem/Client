@@ -35,6 +35,7 @@ const Chart: React.FC<ChartProps> = ({
       yaxis: {
         max: 100,
         decimalsInFloat: 0,
+        min: 0,
       },
       dataLabels: {
         enabled: false,
@@ -49,11 +50,11 @@ const Chart: React.FC<ChartProps> = ({
     series: [
       {
         name: 'Focus Rate',
-        data: item.focusRate,
+        data: item.focusRate.map((value) => (isNaN(value) ? 0 : value)),
       },
       {
         name: 'Interest Rate',
-        data: item.interestRate,
+        data: item.interestRate.map((value) => (isNaN(value) ? 0 : value)),
       },
     ],
   }))
